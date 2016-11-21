@@ -6,7 +6,10 @@ This eliminates the pain point of opening up a new tab to search for words.
 * Be able to search up the definition of a word 
 * Search up synonyms of word
 * Live swap of synonyms
+* O-Auth for Gmail
 
 # Wireframes
+<img src="./wireframes/float.png"></img>
 
+<img src="./wireframes/word_bank.png"></img>
 
