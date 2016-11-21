@@ -9,7 +9,7 @@ This eliminates the pain point of opening up a new tab to search for words.
 * O-Auth for Gmail
 
 ## Wireframes
-<img src="./wireframes/float.png"></img>
+<img src="./wireframes/Float.png"></img>
 
 <img src="./wireframes/word_bank.png"></img>
 
