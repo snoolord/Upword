@@ -4,16 +4,17 @@
   "description": "Increase your vocabulary with this simple extension",
   "version": "0.0.0.1",
   "background": {
-    "scripts": ["hot-reload.js"]
+    "scripts": ["./event/event.js"]
   },
   "browser_action": {
     "default_title": "Upword",
-    "default_popup": "popup.html"
+    "default_popup": "popup/index.html"
   },
   "content_scripts": [
     {
       "matches": ["*://*/*"],
-      "css": ["popup.css"]
+      "css": ["popup.css"],
+      "js": ["./content/content.js"]
     }
   ],
   "permissions": ["tabs", "activeTab"]
