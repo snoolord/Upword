@@ -1,0 +1,20 @@
+{
+  "manifest_version": 2,
+  "name": "Upword",
+  "description": "Increase your vocabulary with this simple extension",
+  "version": "0.0.0.1",
+  "background": {
+    "scripts": ["hot-reload.js"]
+  },
+  "browser_action": {
+    "default_title": "Upword",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*/*"],
+      "css": ["popup.css"]
+    }
+  ],
+  "permissions": ["tabs", "activeTab"]
+}
