@@ -4,7 +4,7 @@
   "description": "Increase your vocabulary with this simple extension",
   "version": "0.0.0.1",
   "background": {
-    "scripts": ["./event/event.js"]
+    "scripts": ["./content/content.js"]
   },
   "browser_action": {
     "default_title": "Upword",
@@ -13,8 +13,7 @@
   "content_scripts": [
     {
       "matches": ["*://*/*"],
-      "css": ["popup.css"],
-      "js": ["./content/content.js"]
+      "js": ["./event/event.js"]
     }
   ],
   "permissions": ["tabs", "activeTab"]

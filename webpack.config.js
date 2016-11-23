@@ -11,28 +11,20 @@ module.exports = {
     filename: '[name].js',
     path: './',
   },
-
-  resolve: {
-    extensions: ['', '.js', '.jsx', '.scss', '.json'],
-    modulesDirectories: ['node_modules']
-  },
-
   module: {
     loaders: [
       {
-        test: /\.(jsx|js)?$/,
+        test: [/\.jsx?$/, /\.js?$/],
+        exclude: /(node_modules|bower_components)/,
         loader: 'babel',
-        exclude: /(node_modules)/,
-        include: path.join(__dirname, 'src'),
         query: {
           presets: ['es2015', 'react']
         }
       }
     ]
+  },
+  devtool: 'source-maps',
+  resolve: {
+    extensions: ["", ".js", ".jsx" ]
   }
 };
-
-// content: ['./content/src/content.js'],
-// event: ['./event/src/event.js'],
-// popup: ['./popup/src/popup.js'],
-// vendors: ['react']
