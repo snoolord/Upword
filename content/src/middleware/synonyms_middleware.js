@@ -1,9 +1,9 @@
 import {
   FETCH_SYNONYMS,
   recieveSynonyms
-} from '../actions/synonym_actions';
+} from '../actions/synonyms_actions';
 
-import { fetchSynonyms } from '../util/synonyms_util';
+import { fetchSynonyms } from '../util/synonyms_api_util';
 
 const SynonymsMiddleware = ({getState, dispatch}) => next => action => {
   const recieveSynonymsSuccess = (synonyms) => dispatch(recieveSynonyms(synonyms));

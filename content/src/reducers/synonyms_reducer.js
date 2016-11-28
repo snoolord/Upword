@@ -1,4 +1,4 @@
-import { RECEIVE_SYNONYMS } from '../actions/synonym_actions';
+import { RECEIVE_SYNONYMS } from '../actions/synonyms_actions';
 
 const _defaultSynonyms = [];
 
@@ -11,3 +11,5 @@ const SynonymsReducer = (state = _defaultSynonyms, action) => {
       return state;
   }
 };
+
+export default SynonymsReducer;
