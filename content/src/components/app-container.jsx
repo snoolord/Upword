@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { fetchSynonyms } from '../actions/synonyms_actions';
+import { fetchSynonyms, clearSynonyms } from '../actions/synonyms_actions';
 import App from './app';
 
 const mapStateToProps = ({synonyms}) => ({
@@ -7,7 +7,8 @@ const mapStateToProps = ({synonyms}) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchSynonyms: word => dispatch(fetchSynonyms(word))
+  fetchSynonyms: word => dispatch(fetchSynonyms(word)),
+  clearSynonyms: () => dispatch(clearSynonyms())  
 });
 
 export default connect(
