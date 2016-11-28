@@ -20,22 +20,28 @@ class App extends React.Component {
     $('body').on('dblclick', e => {
       let yPos = $(e.target).offset().top;
       let xPos = $(e.target).offset().left;
-      let dropdown = $('.upword-dropdown')
-      dropdown.css('display','block');
-      dropdown.css('top', `${yPos + 20}px`);
-      dropdown.css('left', `${xPos}px`);
-    })
+      let sel = window.getSelection();
+      let range = sel.getRangeAt(0);
+      if (range.startOffset !== range.endOffset) {
+        range.deleteContents();
+        range.insertNode(document.createTextNode("laddeedee"));
+        let dropdown = $('.upword-dropdown');
+        dropdown.css('display','block');
+        dropdown.css('top', `${yPos + 20}px`);
+        dropdown.css('left', `${xPos}px`);
+      }
+    });
     $('body').on('click', e => {
       $('.upword-dropdown').css('display', 'none');
-    })
+    });
   }
 
   render() {
     return(
       <div className="upword-dropdown">
-        <h1>Hello from upword</h1>
+        <h1>Hello upword</h1>
       </div>
-    )
+    );
   }
 }
 
