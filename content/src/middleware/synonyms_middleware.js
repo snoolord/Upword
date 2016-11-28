@@ -7,7 +7,6 @@ import { fetchSynonyms } from '../util/synonyms_api_util';
 
 const SynonymsMiddleware = ({getState, dispatch}) => next => action => {
   const receiveSynonymsSuccess = (synonyms) =>{
-    console.log(synonyms);
     dispatch(receiveSynonyms(synonyms));
   };
 
