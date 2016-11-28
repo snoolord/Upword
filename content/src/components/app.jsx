@@ -29,7 +29,6 @@ class App extends React.Component {
         let word = $.trim(selection.toString());
         let range  = selection.getRangeAt(0);
         if(word != '') {
-          console.log(that.props);
           that.props.fetchSynonyms(word);
           let top = coords.top;
           let left = coords.left;
@@ -48,7 +47,7 @@ class App extends React.Component {
 
   showSynonyms() {
     if (this.props.synonyms.length !== 0 ) {
-      return this.props.synonyms.synonyms.map((synonym, index)=> {
+      return this.props.synonyms.map((synonym, index)=> {
           return <li key={index}> {index+1}. {synonym}</li>;
           });
     } else {
@@ -56,7 +55,6 @@ class App extends React.Component {
     }
   }
   render() {
-    console.log(this.props);
     return(
       <div className="upword-dropdown">
         {this.showSynonyms()}
