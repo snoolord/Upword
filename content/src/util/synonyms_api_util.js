@@ -1,4 +1,6 @@
-export const fetchWord = (word, success) => {
+import $ from 'jquery';
+
+export const fetchSynonyms = (word, success) => {
  $.ajax({
    url: `https://wordsapiv1.p.mashape.com/words/${word}/synonyms`,
    type: 'GET',

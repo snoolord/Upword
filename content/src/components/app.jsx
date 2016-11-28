@@ -2,11 +2,16 @@ import React from 'react';
 import $ from 'jquery';
 import './jquery.hotkeys.js';
 
+
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.clickHandler = this.clickHandler.bind(this);
+  }
 
   componentDidMount() {
-    this.clickHandler();
     this.hotkey();
+    this.clickHandler();
   }
 
   hotkey() {
@@ -17,12 +22,15 @@ class App extends React.Component {
   }
 
   clickHandler() {
+    let that = this;
     $('body').dblclick(function(e) {
         let selection = window.getSelection() || document.getSelection() || document.selection.createRange();
         let coords = selection.getRangeAt(0).getBoundingClientRect();
         let word = $.trim(selection.toString());
         let range  = selection.getRangeAt(0);
         if(word != '') {
+          console.log(that.props);
+          that.props.fetchSynonyms(word);
           let top = coords.top;
           let left = coords.left;
           let dropdown = $('.upword-dropdown');
@@ -38,12 +46,22 @@ class App extends React.Component {
     });
   }
 
+  showSynonyms() {
+    if (this.props.synonyms.length !== 0 ) {
+      return this.props.synonyms.synonyms.map((synonym, index)=> {
+          return <li key={index}> {index+1}. {synonym}</li>;
+          });
+    } else {
+      return <div>No Results Found</div>;
+    }
+  }
   render() {
+    console.log(this.props);
     return(
       <div className="upword-dropdown">
-        <h1>Hello from upword</h1>
+        {this.showSynonyms()}
       </div>
-    )
+    );
   }
 }
 
