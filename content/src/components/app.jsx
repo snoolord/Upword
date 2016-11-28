@@ -17,14 +17,20 @@ class App extends React.Component {
   }
 
   clickHandler() {
-    $('body').on('dblclick', e => {
-      let yPos = $(e.target).offset().top;
-      let xPos = $(e.target).offset().left;
-      let dropdown = $('.upword-dropdown')
-      dropdown.css('display','block');
-      dropdown.css('top', `${yPos + 20}px`);
-      dropdown.css('left', `${xPos}px`);
-    })
+    $('body').dblclick(function(e) {
+        var selection = window.getSelection() || document.getSelection() || document.selection.createRange();
+        var coords = selection.getRangeAt(0).getBoundingClientRect();
+        var word = $.trim(selection.toString());
+        console.log(coords);
+        if(word != '') {
+          let top = coords.top;
+          let left = coords.left;
+          let dropdown = $('.upword-dropdown')
+          dropdown.css('display','block');
+          dropdown.css('top', `${top + window.pageYOffset + 20}px`);
+          dropdown.css('left', `${left}px`);
+        }
+    });
     $('body').on('click', e => {
       $('.upword-dropdown').css('display', 'none');
     })
