@@ -1,4 +1,4 @@
-import App from './components/app';
+import AppContainer from './components/app-container';
 import React from 'react';
 import {render} from 'react-dom';
 import {Provider} from 'react-redux';
@@ -14,6 +14,6 @@ document.body.insertBefore(anchor, document.body.childNodes[0]);
 
 render(
   <Provider store={store}>
-    <App/>
+    <AppContainer />
   </Provider>
   , document.getElementById('upword-anchor'));
