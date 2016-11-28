@@ -21,11 +21,14 @@ class App extends React.Component {
         var selection = window.getSelection() || document.getSelection() || document.selection.createRange();
         var coords = selection.getRangeAt(0).getBoundingClientRect();
         var word = $.trim(selection.toString());
+        let range = selection.getRangeAt(0);
         console.log(coords);
-        if(word != '') {
+        if(word !== '') {
           let top = coords.top;
           let left = coords.left;
-          let dropdown = $('.upword-dropdown')
+          range.deleteContents();
+          range.insertNode(document.createTextNode("laddeedee"));
+          let dropdown = $('.upword-dropdown');
           dropdown.css('display','block');
           dropdown.css('top', `${top + window.pageYOffset + 20}px`);
           dropdown.css('left', `${left}px`);
@@ -33,15 +36,15 @@ class App extends React.Component {
     });
     $('body').on('click', e => {
       $('.upword-dropdown').css('display', 'none');
-    })
+    });
   }
 
   render() {
     return(
       <div className="upword-dropdown">
-        <h1>Hello from upword</h1>
+        <h1>Hello upword</h1>
       </div>
-    )
+    );
   }
 }
 
