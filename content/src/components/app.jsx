@@ -18,13 +18,16 @@ class App extends React.Component {
 
   clickHandler() {
     $('body').dblclick(function(e) {
-        var selection = window.getSelection() || document.getSelection() || document.selection.createRange();
-        var coords = selection.getRangeAt(0).getBoundingClientRect();
-        var word = $.trim(selection.toString());
+        let selection = window.getSelection() || document.getSelection() || document.selection.createRange();
+        let coords = selection.getRangeAt(0).getBoundingClientRect();
+        let word = $.trim(selection.toString());
+        let range  = selection.getRangeAt(0);
         if(word != '') {
           let top = coords.top;
           let left = coords.left;
-          let dropdown = $('.upword-dropdown')
+          let dropdown = $('.upword-dropdown');
+          range.deleteContents();
+          range.insertNode(document.createTextNode('hello boys'));
           dropdown.css('display','block');
           dropdown.css('top', `${top + window.pageYOffset + coords.height}px`);
           dropdown.css('left', `${left}px`);
@@ -32,7 +35,7 @@ class App extends React.Component {
     });
     $('body').on('click', e => {
       $('.upword-dropdown').css('display', 'none');
-    })
+    });
   }
 
   render() {
