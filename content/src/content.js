@@ -6,7 +6,6 @@ import configureStore from './store/store';
 
 
 const store = configureStore();
-
 const anchor = document.createElement('div');
 anchor.id = 'upword-anchor';
 

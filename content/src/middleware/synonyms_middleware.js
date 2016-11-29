@@ -12,6 +12,7 @@ import { fetchSynonyms } from '../util/synonyms_api_util';
 
 const SynonymsMiddleware = ({getState, dispatch}) => next => action => {
   const receiveSynonymsSuccess = (synonyms) =>{
+    chrome.storage.sync.set({[synonyms.word]: synonyms.synonyms})
     dispatch(receiveSynonyms(synonyms));
     dispatch(showList());
   };
