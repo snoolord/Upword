@@ -8,7 +8,7 @@ const SynonymsReducer = (state = [], action) => {
   Object.freeze(state);
   switch (action.type) {
     case RECEIVE_SYNONYMS:
-      if (action.synonyms.synonyms.lenght === 0) {
+      if (action.synonyms.synonyms.length === 0) {
         return ["No Results Found"];
       } else {
         return action.synonyms.synonyms;
