@@ -27,12 +27,15 @@ class App extends React.Component {
     let that = this;
     $('body').dblclick(function(e) {
       that.selection = window.getSelection() || document.getSelection() || document.selection.createRange();
-      that.coords = that.selection.getRangeAt(0).getBoundingClientRect();
-      that.word = $.trim(that.selection.toString());
-      that.range  = that.selection.getRangeAt(0);
+      console.log(that.selection);
+      if (that.selection.anchorNode !== null) {
+        that.coords = that.selection.getRangeAt(0).getBoundingClientRect();
+        that.word = $.trim(that.selection.toString());
+        that.range  = that.selection.getRangeAt(0);
+      }
 
       if(that.word !== '') {
-        document.execCommand('copy');
+        document.execCommand('insertText',false , "hello");
         // that.props.fetchSynonyms(that.word);
         // let activeNode = document.activeElement;
         // let deepestNode;
@@ -55,7 +58,7 @@ class App extends React.Component {
         //
         // that.range.commonAncestorContainer.parentElement.innerHTML = left.join('') + middle + right.join('');
         // console.log(that.range);
-        that.range.deleteContents();
+        // that.range.deleteContents();
         // console.log(window.clipboardData);
         // document.execCommand('paste');
 
