@@ -6,8 +6,9 @@ import { hideList } from '../actions/list_actions';
 // Import app component from app.jsx
 import App from './app';
 
-const mapStateToProps = ({synonyms}) => ({
-  synonyms
+const mapStateToProps = ({synonyms, showList}) => ({
+  synonyms,
+  showList
 });
 
 const mapDispatchToProps = dispatch => ({

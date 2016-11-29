@@ -26,24 +26,19 @@ class App extends React.Component {
   clickHandler() {
     let that = this;
     $('body').dblclick(function(e) {
-      let selection = window.getSelection() || document.getSelection() || document.selection.createRange();
-      let coords = selection.getRangeAt(0).getBoundingClientRect();
-      let word = $.trim(selection.toString());
-      let range  = selection.getRangeAt(0);
-      if(word !== '') {
-        that.props.fetchSynonyms(word);
-        let top = coords.top;
-        let left = coords.left;
-        let dropdown = $('.upword-dropdown');
-        range.deleteContents();
-        range.insertNode(document.createTextNode('hello boys'));
-        dropdown.css('display','block');
-        dropdown.css('top', `${top + window.pageYOffset + coords.height}px`);
-        dropdown.css('left', `${left}px`);
+      that.selection = window.getSelection() || document.getSelection() || document.selection.createRange();
+      that.coords = that.selection.getRangeAt(0).getBoundingClientRect();
+      that.word = $.trim(that.selection.toString());
+      that.range  = that.selection.getRangeAt(0);
+      if(that.word !== '') {
+        that.props.fetchSynonyms(that.word);
+        that.range.deleteContents();
+        that.range.insertNode(document.createTextNode('hello boys'));
       }
     });
     $('body').on('click', e => {
       $('.upword-dropdown').css('display', 'none');
+      this.props.hideList();
       this.props.clearSynonyms();
     });
   }
@@ -60,7 +55,20 @@ class App extends React.Component {
     }
   }
 
+  showList() {
+    console.log("in show list ");
+    if (this.props.showList) {
+      let dropdown = $('.upword-dropdown');
+      let top = this.coords.top;
+      let left = this.coords.left;
+      dropdown.css('display','block');
+      dropdown.css('top', `${top + window.pageYOffset + this.coords.height}px`);
+      dropdown.css('left', `${left}px`);
+    }
+  }
   render() {
+    console.log(this.props);
+    this.showList();
     return(
       <div className="upword-dropdown">
         {this.showSynonyms()}
