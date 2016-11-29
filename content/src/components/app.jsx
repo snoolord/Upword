@@ -32,6 +32,7 @@ class App extends React.Component {
       that.range  = that.selection.getRangeAt(0);
       if(that.word !== '') {
         that.props.fetchSynonyms(that.word);
+
         that.range.deleteContents();
         that.range.insertNode(document.createTextNode('hello boys'));
       }
@@ -56,7 +57,6 @@ class App extends React.Component {
   }
 
   showList() {
-    console.log("in show list ");
     if (this.props.showList) {
       let dropdown = $('.upword-dropdown');
       let top = this.coords.top;
@@ -66,8 +66,22 @@ class App extends React.Component {
       dropdown.css('left', `${left}px`);
     }
   }
+
+  findDeepestNestedChildNode(node) {
+    if (node[0].childNodes.length === 0) {
+      return node;
+    }
+    node = node[0].childNodes;
+    return this.findDeepestNestedChildNode(node);
+  }
+
   render() {
-    console.log(this.props);
+    let activeNode = document.activeElement;
+    console.log(activeNode);
+    if (activeNode.childNodes.length === 1) {
+      let deepestNode = this.findDeepestNestedChildNode(activeNode.childNodes);
+      console.log(deepestNode);
+    }
     this.showList();
     return(
       <div className="upword-dropdown">
