@@ -5,7 +5,6 @@ const _defaultState = {
 };
 
 const SynonymsReducer = (state = [], action) => {
-  console.log(action);
   Object.freeze(state);
   switch (action.type) {
     case RECEIVE_SYNONYMS:

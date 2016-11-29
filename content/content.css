@@ -1,12 +1,21 @@
 .upword-dropdown {
   display: none;
   position: absolute;
-  background: black;
-  color: white;
+  background: white;
+  color: black;
   z-index: 999;
-  padding: 10px;
+  padding: 5px 5px 5px 5px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  box-shadow: 1px 5px 5px 1px #eee;
 }
 
-li {
+.upword-dropdown li {
   list-style: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.upword-dropdown li:hover {
+  background: #eee;
 }
