@@ -32,8 +32,6 @@ class App extends React.Component {
       that.range  = that.selection.getRangeAt(0);
       if(that.word !== '') {
         that.props.fetchSynonyms(that.word);
-        that.range.deleteContents();
-        that.range.insertNode(document.createTextNode('hello boys'));
       }
     });
     $('body').on('click', e => {
@@ -43,12 +41,16 @@ class App extends React.Component {
     });
   }
 
+  synClick(e) {
+    let text = e.target.innerText;
+  }
+
   showSynonyms() {
     if ( this.props.synonyms[0] === "No Results Found") {
       return <div>No Results Found</div>;
     } else if ( this.props.synonyms.length !== 0 ) {
-      return this.props.synonyms.map((synonym, index)=> {
-        return <li key={index}> {index+1}. {synonym}</li>;
+      return this.props.synonyms.slice(0,5).map((synonym, index)=> {
+        return <li onClick={this.synClick} key={index}>{synonym}</li>;
       });
     } else {
       return <div></div>;
@@ -56,18 +58,16 @@ class App extends React.Component {
   }
 
   showList() {
-    console.log("in show list ");
     if (this.props.showList) {
       let dropdown = $('.upword-dropdown');
       let top = this.coords.top;
       let left = this.coords.left;
       dropdown.css('display','block');
       dropdown.css('top', `${top + window.pageYOffset + this.coords.height}px`);
-      dropdown.css('left', `${left}px`);
+      dropdown.css('left', `${left - 10}px`);
     }
   }
   render() {
-    console.log(this.props);
     this.showList();
     return(
       <div className="upword-dropdown">

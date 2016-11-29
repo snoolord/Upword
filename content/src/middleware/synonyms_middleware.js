@@ -19,7 +19,6 @@ const SynonymsMiddleware = ({getState, dispatch}) => next => action => {
 
   switch (action.type) {
     case FETCH_SYNONYMS:
-    console.log("fetching synonyms");
       fetchSynonyms(action.word, receiveSynonymsSuccess);
       return next(action);
     default:
