@@ -30,11 +30,36 @@ class App extends React.Component {
       that.coords = that.selection.getRangeAt(0).getBoundingClientRect();
       that.word = $.trim(that.selection.toString());
       that.range  = that.selection.getRangeAt(0);
-      if(that.word !== '') {
-        that.props.fetchSynonyms(that.word);
 
+      if(that.word !== '') {
+        document.execCommand('copy');
+        // that.props.fetchSynonyms(that.word);
+        // let activeNode = document.activeElement;
+        // let deepestNode;
+        // console.log(activeNode);
+        // if (activeNode.childNodes.length === 1) {
+        //   deepestNode = that.findDeepestNestedChildNode(activeNode.childNodes);
+        //   console.log(deepestNode);
+        // }
+        // console.log(deepestNode, "DEEPEST NODE");
+        // let innerHTML = that.range.commonAncestorContainer.parentElement.innerHTML.split('');
+        // let start = that.range.startOffset;
+        // let end = that.range.endOffset;
+        // let left = innerHTML.slice(0, start);
+        // let middle = innerHTML.slice(start, end);
+        // let right = innerHTML.slice(end);
+        // console.log(left, "LEFT");
+        // console.log(middle, "middle");
+        // console.log(right, "right");
+        // middle = "word";
+        //
+        // that.range.commonAncestorContainer.parentElement.innerHTML = left.join('') + middle + right.join('');
+        // console.log(that.range);
         that.range.deleteContents();
-        that.range.insertNode(document.createTextNode('hello boys'));
+        // console.log(window.clipboardData);
+        // document.execCommand('paste');
+
+        // that.range.insertNode(document.createTextNode('hello boys'));
       }
     });
     $('body').on('click', e => {
@@ -76,12 +101,6 @@ class App extends React.Component {
   }
 
   render() {
-    let activeNode = document.activeElement;
-    console.log(activeNode);
-    if (activeNode.childNodes.length === 1) {
-      let deepestNode = this.findDeepestNestedChildNode(activeNode.childNodes);
-      console.log(deepestNode);
-    }
     this.showList();
     return(
       <div className="upword-dropdown">
