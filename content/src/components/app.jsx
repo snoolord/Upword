@@ -27,7 +27,6 @@ class App extends React.Component {
     let that = this;
     $('body').dblclick(function(e) {
       that.selection = window.getSelection() || document.getSelection() || document.selection.createRange();
-      console.log(that.selection);
       if (that.selection.anchorNode !== null) {
         that.coords = that.selection.getRangeAt(0).getBoundingClientRect();
         that.word = $.trim(that.selection.toString());
@@ -36,33 +35,6 @@ class App extends React.Component {
 
       if(that.word !== '') {
         document.execCommand('insertText',false , "hello");
-        // that.props.fetchSynonyms(that.word);
-        // let activeNode = document.activeElement;
-        // let deepestNode;
-        // console.log(activeNode);
-        // if (activeNode.childNodes.length === 1) {
-        //   deepestNode = that.findDeepestNestedChildNode(activeNode.childNodes);
-        //   console.log(deepestNode);
-        // }
-        // console.log(deepestNode, "DEEPEST NODE");
-        // let innerHTML = that.range.commonAncestorContainer.parentElement.innerHTML.split('');
-        // let start = that.range.startOffset;
-        // let end = that.range.endOffset;
-        // let left = innerHTML.slice(0, start);
-        // let middle = innerHTML.slice(start, end);
-        // let right = innerHTML.slice(end);
-        // console.log(left, "LEFT");
-        // console.log(middle, "middle");
-        // console.log(right, "right");
-        // middle = "word";
-        //
-        // that.range.commonAncestorContainer.parentElement.innerHTML = left.join('') + middle + right.join('');
-        // console.log(that.range);
-        // that.range.deleteContents();
-        // console.log(window.clipboardData);
-        // document.execCommand('paste');
-
-        // that.range.insertNode(document.createTextNode('hello boys'));
         that.props.fetchSynonyms(that.word);
       }
     });
