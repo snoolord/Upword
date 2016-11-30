@@ -65,7 +65,7 @@ class App extends React.Component {
 
   showSynonyms() {
     return(
-      this.props.synonyms.map((word, idx) => (
+      this.props.synonyms.slice(0,5).map((word, idx) => (
         <li key={idx} onClick={this.synClick}>{word}</li>
       ))
     );
