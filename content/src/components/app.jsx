@@ -81,14 +81,6 @@ class App extends React.Component {
     }
   }
 
-  findDeepestNestedChildNode(node) {
-    if (node[0].childNodes.length === 0) {
-      return node;
-    }
-    node = node[0].childNodes;
-    return this.findDeepestNestedChildNode(node);
-  }
-
   render() {
     console.log(this.props.synonyms);
     this.showList();
