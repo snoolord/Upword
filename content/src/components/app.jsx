@@ -7,6 +7,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.clickHandler = this.clickHandler.bind(this);
+    this.synClick = this.synClick.bind(this);
+    this.sel = '';
   }
 
   componentDidMount() {
@@ -32,13 +34,14 @@ class App extends React.Component {
         that.word = $.trim(that.selection.toString()).toLowerCase();
         that.range  = that.selection.getRangeAt(0);
       }
-
+      console.log(that.selection);
+      this.sel = that.selection.focusNode;
+      console.log(this.sel);
       if(that.word !== '') {
         document.execCommand('insertText',false , "");
         let span = document.createElement('span');
-        span.setAttribute("class","upword");
+        span.setAttribute("id","upword");
         span.textContent = that.word;
-        that.range.deleteContents();
         that.range.insertNode(span);
         chrome.storage.sync.get(that.word, (synonyms) => {
           if (Object.keys(synonyms).length === 0) {
@@ -48,7 +51,7 @@ class App extends React.Component {
           }
         });
       }
-    });
+    }.bind(this));
     // $('body').on('click', e => {
     //   $('.upword-dropdown').css('display', 'none');
     //   this.props.hideList();
@@ -59,7 +62,12 @@ class App extends React.Component {
   synClick(e) {
     let text = e.target.innerText;
     // document.execCommand('insertText', false , text);
-    $('.upword').replaceWith(text);
+    $('#upword').replaceWith(text);
+    console.log(this.sel.parentElement);
+    setTimeout(function() {
+      this.sel.parentElement.focus();
+    }.bind(this), 0);
+
     $('.upword-dropdown').css('display', 'none');
   }
 
