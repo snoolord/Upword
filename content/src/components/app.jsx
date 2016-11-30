@@ -38,14 +38,12 @@ class App extends React.Component {
         let span = document.createElement('span');
         span.setAttribute("class","upword");
         span.textContent = that.word;
+        that.range.deleteContents();
         that.range.insertNode(span);
         chrome.storage.sync.get(that.word, (synonyms) => {
-          console.log(synonyms);
           if (Object.keys(synonyms).length === 0) {
-            console.log("syn not found");
             that.props.fetchSynonyms(that.word);
           } else {
-            console.log("syn found");
             that.props.gotFromCache(synonyms[that.word]);
           }
         });
@@ -60,13 +58,14 @@ class App extends React.Component {
 
   synClick(e) {
     let text = e.target.innerText;
-    document.execCommand('insertText', false , text);
-    console.log(text);
+    // document.execCommand('insertText', false , text);
+    $('.upword').replaceWith(text);
+    $('.upword-dropdown').css('display', 'none');
   }
 
   showSynonyms() {
     return(
-      this.props.synonyms.map((word, idx) => (
+      this.props.synonyms.slice(0,5).map((word, idx) => (
         <li key={idx} onClick={this.synClick}>{word}</li>
       ))
     );
@@ -84,7 +83,6 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.props.synonyms);
     this.showList();
     return(
       <div className="upword-dropdown">
