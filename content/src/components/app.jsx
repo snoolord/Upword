@@ -34,7 +34,11 @@ class App extends React.Component {
       }
 
       if(that.word !== '') {
-        document.execCommand('insertText',false , "hello");
+        document.execCommand('insertText',false , "");
+        let span = document.createElement('span');
+        span.setAttribute("class","upword");
+        span.textContent = that.word;
+        that.range.insertNode(span);
         chrome.storage.sync.get(that.word, (synonyms) => {
           console.log(synonyms);
           if (Object.keys(synonyms).length === 0) {
@@ -56,6 +60,7 @@ class App extends React.Component {
 
   synClick(e) {
     let text = e.target.innerText;
+    document.execCommand('insertText', false , text);
     console.log(text);
   }
 
@@ -64,7 +69,7 @@ class App extends React.Component {
       this.props.synonyms.map((word, idx) => (
         <li key={idx} onClick={this.synClick}>{word}</li>
       ))
-    )
+    );
   }
 
   showList() {
