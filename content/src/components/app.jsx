@@ -34,31 +34,28 @@ class App extends React.Component {
       }
 
       if(that.word !== '') {
-        document.execCommand('insertText',false , "hello");
+        // document.execCommand('insertText',false , "hello");
         that.props.fetchSynonyms(that.word);
       }
     });
-    $('body').on('click', e => {
-      $('.upword-dropdown').css('display', 'none');
-      this.props.hideList();
-      this.props.clearSynonyms();
-    });
+    // $('body').on('click', e => {
+    //   $('.upword-dropdown').css('display', 'none');
+    //   this.props.hideList();
+    //   this.props.clearSynonyms();
+    // });
   }
 
   synClick(e) {
     let text = e.target.innerText;
+    console.log(text);
   }
 
   showSynonyms() {
-    if ( this.props.synonyms[0] === "No Results Found") {
-      return <div>No Results Found</div>;
-    } else if ( this.props.synonyms.length !== 0 ) {
-      return this.props.synonyms.slice(0,5).map((synonym, index)=> {
-        return <li onClick={this.synClick} key={index}>{synonym}</li>;
-      });
-    } else {
-      return <div></div>;
-    }
+    return(
+      this.props.synonyms.map((word, idx) => (
+        <li key={idx} onClick={this.synClick}>{word}</li>
+      ))
+    )
   }
 
   showList() {
