@@ -29,13 +29,22 @@ class App extends React.Component {
       that.selection = window.getSelection() || document.getSelection() || document.selection.createRange();
       if (that.selection.anchorNode !== null) {
         that.coords = that.selection.getRangeAt(0).getBoundingClientRect();
-        that.word = $.trim(that.selection.toString());
+        that.word = $.trim(that.selection.toString()).toLowerCase();
         that.range  = that.selection.getRangeAt(0);
       }
 
       if(that.word !== '') {
-        // document.execCommand('insertText',false , "hello");
-        that.props.fetchSynonyms(that.word);
+        document.execCommand('insertText',false , "hello");
+        chrome.storage.sync.get(that.word, (synonyms) => {
+          console.log(synonyms);
+          if (Object.keys(synonyms).length === 0) {
+            console.log("syn not found");
+            that.props.fetchSynonyms(that.word);
+          } else {
+            console.log("syn found");
+            that.props.gotFromCache(synonyms[that.word]);
+          }
+        });
       }
     });
     // $('body').on('click', e => {
@@ -69,15 +78,8 @@ class App extends React.Component {
     }
   }
 
-  findDeepestNestedChildNode(node) {
-    if (node[0].childNodes.length === 0) {
-      return node;
-    }
-    node = node[0].childNodes;
-    return this.findDeepestNestedChildNode(node);
-  }
-
   render() {
+    console.log(this.props.synonyms);
     this.showList();
     return(
       <div className="upword-dropdown">
