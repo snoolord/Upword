@@ -43,6 +43,7 @@ class App extends React.Component {
         span.setAttribute("id","upword");
         span.textContent = that.word;
         that.range.insertNode(span);
+
         chrome.storage.sync.get(that.word, (synonyms) => {
           if (Object.keys(synonyms).length === 0) {
             that.props.fetchSynonyms(that.word);
@@ -67,10 +68,29 @@ class App extends React.Component {
     setTimeout(function() {
       this.sel.parentElement.focus();
     }.bind(this), 0);
-
+    this.sel.parentElement.focus();
+    // this.placeCaretAtEnd(this.sel.parentElement);
     $('.upword-dropdown').css('display', 'none');
   }
 
+  placeCaretAtEnd(el) {
+    el.focus();
+    if (typeof window.getSelection !== "undefined"
+    && typeof document.createRange !== "undefined") {
+      var range = document.createRange();
+      range.selectNodeContents(el);
+      range.collapse(false);
+      var sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+    } else if (typeof document.body.createTextRange !== "undefined") {
+      var textRange = document.body.createTextRange();
+      textRange.moveToElementText(el);
+      console.log(textRange.moveToElementText(el), "TEXT RANGE");
+      textRange.collapse(false);
+      textRange.select();
+    }
+  }
   showSynonyms() {
     return(
       this.props.synonyms.slice(0,5).map((word, idx) => (
