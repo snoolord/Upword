@@ -29,7 +29,7 @@ class App extends React.Component {
       that.selection = window.getSelection() || document.getSelection() || document.selection.createRange();
       if (that.selection.anchorNode !== null) {
         that.coords = that.selection.getRangeAt(0).getBoundingClientRect();
-        that.word = $.trim(that.selection.toString()).toLowerCase();
+        that.word = $.trim(that.selection.toString());
         that.range  = that.selection.getRangeAt(0);
       }
 
@@ -40,11 +40,12 @@ class App extends React.Component {
         span.textContent = that.word;
         that.range.deleteContents();
         that.range.insertNode(span);
-        chrome.storage.sync.get(that.word, (synonyms) => {
+        let lowercaseWord = that.word.toLowerCase();
+        chrome.storage.sync.get(lowercaseWord, (synonyms) => {
           if (Object.keys(synonyms).length === 0) {
-            that.props.fetchSynonyms(that.word);
+            that.props.fetchSynonyms(lowercaseWord);
           } else {
-            that.props.gotFromCache(synonyms[that.word]);
+            that.props.gotFromCache(synonyms[lowercaseWord]);
           }
         });
       }
