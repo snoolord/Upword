@@ -5,7 +5,7 @@
 Upword is a Chrome Extension that allows user to quickly replace words with their synonyms. Upword can also be configured using a hotkey (in development).
 
 <hr>
-![](docs/ScreenCapture.gif)
+<img src="docs/ScreenCapture.gif" style="width: 400px">
 <hr>
 
 ### Installation instructions
