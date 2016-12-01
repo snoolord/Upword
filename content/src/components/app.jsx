@@ -51,7 +51,6 @@ class App extends React.Component {
        if(that.word !== '') {
          // right now the word is highlighted
          // we use execCommand to "paste" an empty string to "remove it"
-        //  document.execCommand('insertText',false , "");
          this.clickWord = that.word.toLowerCase();
          chrome.storage.sync.get(this.clickWord, (synonyms) => {
            if (Object.keys(synonyms).length === 0) {
@@ -62,18 +61,12 @@ class App extends React.Component {
          });
        }
      }.bind(this));
-     // $('body').on('click', e => {
-     //   $('.upword-dropdown').css('display', 'none');
-     //   this.props.hideList();
-     //   this.props.clearSynonyms();
-     // });
    }
 
 
   synClick(e) {
     e.preventDefault();
     let text = e.target.innerText;
-    // $('#upword').replaceWith(text);
     // on click on the li it loses "focus" on the text input
     // this setTimeout function allows us to focus back into the element
     // inside the function we are inserting the text that was selected
@@ -85,10 +78,6 @@ class App extends React.Component {
     this.sel.parentElement.focus();
     $('.upword-dropdown').css('display', 'none');
   }
-  //
-  // thesaurusRedirect() {
-  //   window.open('http://www.thesaurus.com/browse/' + this.clickWord);
-  // }
 
   showSynonyms() {
     if (this.props.synonyms[0] == "No Results Found"){
@@ -118,13 +107,9 @@ class App extends React.Component {
     return(
       <div className="upword-dropdown">
         {this.showSynonyms()}
-        <a
-          className="thesaurus-link"
-          target="_blank"
-          href={'http://www.thesaurus.com/browse/' + this.clickWord}>
-          <img
-            src="http://res.cloudinary.com/dmdj7eggw/image/upload/v1480576869/thesaurus_lztwqo.png">
-          </img>
+        <a className="thesaurus-link" target="_blank"
+           href={'http://www.thesaurus.com/browse/' + this.clickWord}>
+           Other synonyms...
         </a>
       </div>
     );
