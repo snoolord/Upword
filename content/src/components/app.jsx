@@ -14,6 +14,7 @@ class App extends React.Component {
   componentDidMount() {
     this.hotkey();
     this.clickHandler();
+    this.closeDropdown();
   }
   componentWillUnmount() {
     this.props.clearSynonyms();
@@ -22,6 +23,17 @@ class App extends React.Component {
     $('body').bind('keydown', 'ctrl+a', ()=>{
       let dropdown = $('.upword-dropdown');
       dropdown.css('display','block');
+    });
+  }
+
+  closeDropdown() {
+    $('body').on('click', e => {
+       var container = $(".upword-dropdown");
+       if (!container.is(e.target) && container.has(e.target).length === 0) {
+         $('.upword-dropdown').css('display', 'none');
+         this.props.hideList();
+         this.props.clearSynonyms();
+       }
     });
   }
 
@@ -38,7 +50,7 @@ class App extends React.Component {
        if(that.word !== '') {
          // right now the word is highlighted
          // we use execCommand to "paste" an empty string to "remove it"
-         document.execCommand('insertText',false , "");
+        //  document.execCommand('insertText',false , "");
          let lowercaseWord = that.word.toLowerCase();
          chrome.storage.sync.get(lowercaseWord, (synonyms) => {
            if (Object.keys(synonyms).length === 0) {
@@ -66,18 +78,23 @@ class App extends React.Component {
     // inside the function we are inserting the text that was selected
     setTimeout(function() {
       this.sel.parentElement.focus();
-      document.execCommand('insertText', false , text + " ");
+      document.execCommand('delete');
+      document.execCommand('insertText', false , text);
     }.bind(this), 0);
     this.sel.parentElement.focus();
     $('.upword-dropdown').css('display', 'none');
   }
 
   showSynonyms() {
-    return(
-      this.props.synonyms.slice(0,5).map((word, idx) => (
-        <li key={idx} onClick={this.synClick}>{word}</li>
-      ))
-    );
+    if (this.props.synonyms[0] == "No Results Found"){
+      return <li>No Results Found</li>
+    } else {
+      return(
+        this.props.synonyms.slice(0,5).map((word, idx) => (
+          <li key={idx} onClick={this.synClick}>{word}</li>
+        ))
+      )
+    }
   }
 
   showList() {
