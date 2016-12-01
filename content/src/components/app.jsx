@@ -9,6 +9,7 @@ class App extends React.Component {
     this.clickHandler = this.clickHandler.bind(this);
     this.synClick = this.synClick.bind(this);
     this.sel = '';
+    this.clickWord = '';
   }
 
   componentDidMount() {
@@ -51,12 +52,12 @@ class App extends React.Component {
          // right now the word is highlighted
          // we use execCommand to "paste" an empty string to "remove it"
         //  document.execCommand('insertText',false , "");
-         let lowercaseWord = that.word.toLowerCase();
-         chrome.storage.sync.get(lowercaseWord, (synonyms) => {
+         this.clickWord = that.word.toLowerCase();
+         chrome.storage.sync.get(this.clickWord, (synonyms) => {
            if (Object.keys(synonyms).length === 0) {
-             that.props.fetchSynonyms(lowercaseWord);
+             that.props.fetchSynonyms(this.clickWord);
            } else {
-             that.props.gotFromCache(synonyms[lowercaseWord]);
+             that.props.gotFromCache(synonyms[this.clickWord]);
            }
          });
        }
@@ -84,16 +85,20 @@ class App extends React.Component {
     this.sel.parentElement.focus();
     $('.upword-dropdown').css('display', 'none');
   }
+  //
+  // thesaurusRedirect() {
+  //   window.open('http://www.thesaurus.com/browse/' + this.clickWord);
+  // }
 
   showSynonyms() {
     if (this.props.synonyms[0] == "No Results Found"){
-      return <li>No Results Found</li>
+      return <li>No Results Found</li>;
     } else {
       return(
         this.props.synonyms.slice(0,5).map((word, idx) => (
           <li key={idx} onClick={this.synClick}>{word}</li>
         ))
-      )
+      );
     }
   }
 
@@ -113,6 +118,14 @@ class App extends React.Component {
     return(
       <div className="upword-dropdown">
         {this.showSynonyms()}
+        <a
+          className="thesaurus-link"
+          target="_blank"
+          href={'http://www.thesaurus.com/browse/' + this.clickWord}>
+          <img
+            src="http://res.cloudinary.com/dmdj7eggw/image/upload/v1480576869/thesaurus_lztwqo.png">
+          </img>
+        </a>
       </div>
     );
   }

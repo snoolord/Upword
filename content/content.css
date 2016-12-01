@@ -19,3 +19,13 @@
 .upword-dropdown li:hover {
   background: #eee;
 }
+
+.thesaurus-link {
+  cursor: pointer;
+  border: none;
+  padding: 5px 10px;
+}
+
+.thesaurus-link :hover {
+  opacity: .8;
+}
