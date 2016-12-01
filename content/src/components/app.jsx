@@ -34,15 +34,11 @@ class App extends React.Component {
         that.word = $.trim(that.selection.toString()).toLowerCase();
         that.range  = that.selection.getRangeAt(0);
       }
-      console.log(that.selection);
       this.sel = that.selection.focusNode;
-      console.log(this.sel);
       if(that.word !== '') {
+        // right now the word is highlighted
+        // we use execCommand to "paste" an empty string to "remove it"
         document.execCommand('insertText',false , "");
-        let span = document.createElement('span');
-        span.setAttribute("id","upword");
-        span.textContent = that.word;
-        that.range.insertNode(span);
 
         chrome.storage.sync.get(that.word, (synonyms) => {
           if (Object.keys(synonyms).length === 0) {
@@ -61,36 +57,20 @@ class App extends React.Component {
   }
 
   synClick(e) {
+    e.preventDefault();
     let text = e.target.innerText;
-    // document.execCommand('insertText', false , text);
-    $('#upword').replaceWith(text);
-    console.log(this.sel.parentElement);
+    // $('#upword').replaceWith(text);
+    // on click on the li it loses "focus" on the text input
+    // this setTimeout function allows us to focus back into the element
+    // inside the function we are inserting the text that was selected
     setTimeout(function() {
       this.sel.parentElement.focus();
+      document.execCommand('insertText', false , text + " ");
     }.bind(this), 0);
     this.sel.parentElement.focus();
-    // this.placeCaretAtEnd(this.sel.parentElement);
     $('.upword-dropdown').css('display', 'none');
   }
 
-  placeCaretAtEnd(el) {
-    el.focus();
-    if (typeof window.getSelection !== "undefined"
-    && typeof document.createRange !== "undefined") {
-      var range = document.createRange();
-      range.selectNodeContents(el);
-      range.collapse(false);
-      var sel = window.getSelection();
-      sel.removeAllRanges();
-      sel.addRange(range);
-    } else if (typeof document.body.createTextRange !== "undefined") {
-      var textRange = document.body.createTextRange();
-      textRange.moveToElementText(el);
-      console.log(textRange.moveToElementText(el), "TEXT RANGE");
-      textRange.collapse(false);
-      textRange.select();
-    }
-  }
   showSynonyms() {
     return(
       this.props.synonyms.slice(0,5).map((word, idx) => (
