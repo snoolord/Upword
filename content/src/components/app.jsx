@@ -7,6 +7,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.clickHandler = this.clickHandler.bind(this);
+    this.synClick = this.synClick.bind(this);
+    this.sel = '';
   }
 
   componentDidMount() {
@@ -24,43 +26,49 @@ class App extends React.Component {
   }
 
   clickHandler() {
-    let that = this;
-    $('body').dblclick(function(e) {
-      that.selection = window.getSelection() || document.getSelection() || document.selection.createRange();
-      if (that.selection.anchorNode !== null) {
-        that.coords = that.selection.getRangeAt(0).getBoundingClientRect();
-        that.word = $.trim(that.selection.toString());
-        that.range  = that.selection.getRangeAt(0);
-      }
+     let that = this;
+     $('body').dblclick(function(e) {
+       that.selection = window.getSelection() || document.getSelection() || document.selection.createRange();
+       if (that.selection.anchorNode !== null) {
+         that.coords = that.selection.getRangeAt(0).getBoundingClientRect();
+         that.word = $.trim(that.selection.toString());
+         that.range  = that.selection.getRangeAt(0);
+       }
+       this.sel = that.selection.focusNode;
+       if(that.word !== '') {
+         // right now the word is highlighted
+         // we use execCommand to "paste" an empty string to "remove it"
+         document.execCommand('insertText',false , "");
+         let lowercaseWord = that.word.toLowerCase();
+         chrome.storage.sync.get(lowercaseWord, (synonyms) => {
+           if (Object.keys(synonyms).length === 0) {
+             that.props.fetchSynonyms(lowercaseWord);
+           } else {
+             that.props.gotFromCache(synonyms[lowercaseWord]);
+           }
+         });
+       }
+     }.bind(this));
+     // $('body').on('click', e => {
+     //   $('.upword-dropdown').css('display', 'none');
+     //   this.props.hideList();
+     //   this.props.clearSynonyms();
+     // });
+   }
 
-      if(that.word !== '') {
-        document.execCommand('insertText',false , "");
-        let span = document.createElement('span');
-        span.setAttribute("class","upword");
-        span.textContent = that.word;
-        that.range.deleteContents();
-        that.range.insertNode(span);
-        let lowercaseWord = that.word.toLowerCase();
-        chrome.storage.sync.get(lowercaseWord, (synonyms) => {
-          if (Object.keys(synonyms).length === 0) {
-            that.props.fetchSynonyms(lowercaseWord);
-          } else {
-            that.props.gotFromCache(synonyms[lowercaseWord]);
-          }
-        });
-      }
-    });
-    // $('body').on('click', e => {
-    //   $('.upword-dropdown').css('display', 'none');
-    //   this.props.hideList();
-    //   this.props.clearSynonyms();
-    // });
-  }
 
   synClick(e) {
+    e.preventDefault();
     let text = e.target.innerText;
-    // document.execCommand('insertText', false , text);
-    $('.upword').replaceWith(text);
+    // $('#upword').replaceWith(text);
+    // on click on the li it loses "focus" on the text input
+    // this setTimeout function allows us to focus back into the element
+    // inside the function we are inserting the text that was selected
+    setTimeout(function() {
+      this.sel.parentElement.focus();
+      document.execCommand('insertText', false , text + " ");
+    }.bind(this), 0);
+    this.sel.parentElement.focus();
     $('.upword-dropdown').css('display', 'none');
   }
 
