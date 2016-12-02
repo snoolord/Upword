@@ -6,7 +6,7 @@ Upword is a Chrome Extension that allows users to quickly replace words with the
 + [Download in the Chrome Extension Store](https://chrome.google.com/webstore/detail/upword/caccnpmojcgaglgnmbchfodecmfkcjkl?authuser=3)
 
 <hr>
-<img src="docs/ScreenCapture.gif" style="width:500px">
+<img src="docs/ScreenCap.gif" style="width:500px">
 <hr>
 
 ### Instructions
