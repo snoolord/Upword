@@ -15,7 +15,7 @@ const SynonymsReducer = (state = [], action) => {
       if (action.synonyms.length === 0) {
         return ["No Results Found"];
       } else {
-      return action.synonyms;
+        return action.synonyms;
       }
     default:
       return state;

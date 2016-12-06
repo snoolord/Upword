@@ -45,8 +45,8 @@ class App extends React.Component {
        if (that.selection.anchorNode !== null) {
          that.coords = that.selection.getRangeAt(0).getBoundingClientRect();
          that.word = $.trim(that.selection.toString());
-         that.range  = that.selection.getRangeAt(0);
        }
+       console.log(that.selection);
        this.sel = that.selection.focusNode;
        if(that.word !== '') {
          // right now the word is highlighted
@@ -70,12 +70,14 @@ class App extends React.Component {
     // on click on the li it loses "focus" on the text input
     // this setTimeout function allows us to focus back into the element
     // inside the function we are inserting the text that was selected
-    setTimeout(function() {
-      this.sel.parentElement.focus();
-      document.execCommand('delete');
-      document.execCommand('insertText', false , text);
-    }.bind(this), 0);
-    this.sel.parentElement.focus();
+    // setTimeout(function() {
+    //   // this.sel.parentElement.focus();
+    // }.bind(this), 0);
+    console.log(this.sel.parentElement, "this is the parent element s");
+    console.log("hi  ");
+    // this.sel.parentElement.focus();
+    // document.execCommand('delete');
+    // document.execCommand('insertText', false , text);
     $('.upword-dropdown').css('display', 'none');
   }
 
