@@ -20,5 +20,5 @@
   "icons": { "16": "docs/icons/16.png",
            "48": "docs/icons/48.png",
           "128": "docs/icons/128.png" },
-  "permissions": ["tabs", "activeTab", "storage"]
+  "permissions": ["tabs", "activeTab", "*://mail.google.com/*", "storage"]
 }
