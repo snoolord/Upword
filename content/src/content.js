@@ -1,10 +1,13 @@
-import { getWord } from './listener';
+import { getWord, getFieldsAndAddEventListeners } from './listener';
+console.log("JavaScript successfully injected");
 
 MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
 
 var observer = new MutationObserver(function(mutations, observer) {
     // fired when a mutation occurs
-    let contentEditableDivs = document.querySelectorAll('div[contenteditable="true"]');
+    getFieldsAndAddEventListeners('div[contenteditable="true"]');
+    getFieldsAndAddEventListeners('input');
+    getFieldsAndAddEventListeners('textarea');
     // ...
 });
 
@@ -17,7 +20,6 @@ observer.observe(document, {
 });
 
 (() => {
-    console.log("hello");
     const anchor = document.createElement('div');
     anchor.id = 'upword-anchor';
     document.body.insertBefore(anchor, document.body.childNodes[0]);
