@@ -4,6 +4,7 @@
   "description": "Upword is a chrome extension that helps you look up words! Easily find the definition and synonyms with the press of a key. This eliminates the pain point of opening up a new tab to search for words.",
   "main": "index.js",
   "dependencies": {
+    "axios": "^0.15.3",
     "babel-core": "^6.18.2",
     "babel-loader": "^6.2.8",
     "babel-preset-es2015": "^6.18.0",

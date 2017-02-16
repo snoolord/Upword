@@ -1,7 +1,7 @@
 import { mutationObserver } from './mutation-observer';
+import axios from 'axios';
 
 console.log("JavaScript successfully injected");
-
 mutationObserver();
 
 (() => {
