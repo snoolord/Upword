@@ -27,6 +27,14 @@
     background: #eee;
 }
 
+.part-of-speech-list {
+    display: none;
+}
+
+.part-of-speech-list.active {
+    display: block;
+}
+
 #upword-anchor {
 
 }
