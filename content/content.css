@@ -4,12 +4,29 @@
   background: white;
   color: black;
   z-index: 999;
-  padding: 5px 5px 5px 5px;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
-  border: 1px solid rgb(200,200,200);
   box-shadow: 1px 5px 5px 1px rgba(100,100,100,.2);
 }
+
+.pos-buttons {
+    display: flex;
+    justify-content: space-around;
+    box-shadow: 0 1.5px 2px -2px gray;
+}
+
+.pos-button {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+}
+
+.active.pos-button{
+    background: #eee;
+}
+
 #upword-anchor {
 
 }
