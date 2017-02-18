@@ -11,19 +11,21 @@ const createDropdownTabsAndInfo = (dropdownContainer, wordInfo) => {
             partOfSpeechButton.innerHTML = partOfSpeech
             partOfSpeechButton.setAttribute('id', `${partOfSpeech}-button`)
             partOfSpeechButton.setAttribute('class', 'pos-button')
-            if (first === 0) {
-                partOfSpeechButton.classList.add('active')
-                first++;
-            }
             dropdownButtons.appendChild(partOfSpeechButton)
             partOfSpeechButton.addEventListener('click', function () {
                 let activeButton = document.getElementsByClassName('pos-button active')[0]
-                if (activeButton) {
-                    activeButton.classList.remove('active')
-                }
+                let activeList = document.getElementsByClassName('part-of-speech-list active')[0]
+                activeButton.classList.remove('active')
+                activeList.classList.remove('active')
+                document.getElementById(`${this.innerHTML}-list`).classList.add('active')
                 this.classList.add('active')
-            });
+            })
             let list = createList(partOfSpeech, wordInfo[partOfSpeech])
+            if (first === 0) {
+                partOfSpeechButton.classList.add('active')
+                list.classList.add('active')
+                first++
+            }
             lists.push(list)
             // dropdownContainer.appendChild(list);
             // upwordDropdown.appendChild(list);

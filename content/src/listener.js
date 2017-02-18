@@ -24,7 +24,6 @@ export const getWord = () => {
             let upwordAnchor = document.getElementById('upword-anchor')
             let upwordDropdown = createDropdown(response.data, selectionCoordinates)
             console.log(upwordDropdown)
-            console.log(upwordAnchor);
             upwordAnchor.appendChild(upwordDropdown)
         })
     }

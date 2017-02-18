@@ -35,6 +35,17 @@
     display: block;
 }
 
+.synonyms-container {
+    display: none;
+    position: absolute;
+}
+.synonyms-container.active {
+    display: block;
+    left: 100%;
+    top: 0;
+
+}
+
 #upword-anchor {
 
 }
