@@ -3,7 +3,7 @@ import createDropdownTabsAndInfo from './dropdown-tabs'
 const createDropdown = function (wordInfo, selectionCoordinates) {
     let upwordDropdown = document.createElement('div')
     window.addEventListener('click', function (e) {
-        if (e.target !== upwordDropdown) {
+        if (e.target !== upwordDropdown && !upwordDropdown.contains(e.target)) {
             upwordDropdown.remove()
             window.removeEventListener('click', function () {})
         }

@@ -1,7 +1,7 @@
 import createList from './dropdown-list'
 
 const createDropdownTabsAndInfo = (field, dropdownContainer, wordInfo) => {
-    console.log(dropdownContainer, wordInfo)
+    // console.log(dropdownContainer, wordInfo)
     let dropdownButtons = document.createElement('div')
     dropdownButtons.setAttribute('class', 'pos-buttons')
     let lists = []

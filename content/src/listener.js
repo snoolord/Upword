@@ -7,16 +7,26 @@ const getWord = function () {
               document.selection.createRange()
     let selection = txt.toString().toLowerCase()
     let validSelection = selection.trim().length > 0
-    console.log(this)
     if (validSelection) {
         let selectionCoordinates = txt.getRangeAt(0).getBoundingClientRect()
-        let url = `https://upword-server.herokuapp.com/word/${selection}`
+        let url = 'https://upword-server.herokuapp.com/word/'
         let that = this
-        axios.get(url).then(function (response) {
+        axios.get(url + selection, {
+            validateStatus: function (status) {
+                return status >= 200 && status < 300
+            }
+        }).then(function (response) {
             let upwordAnchor = document.getElementById('upword-anchor')
             let upwordDropdown = createDropdown.call(that, response.data, selectionCoordinates)
-            console.log(upwordDropdown)
             upwordAnchor.appendChild(upwordDropdown)
+        }).catch(function () {
+            axios.post(url, {
+                word: selection
+            }).then(function (response) {
+                let upwordAnchor = document.getElementById('upword-anchor')
+                let upwordDropdown = createDropdown.call(that, response.data, selectionCoordinates)
+                upwordAnchor.appendChild(upwordDropdown)
+            })
         })
     }
 }
