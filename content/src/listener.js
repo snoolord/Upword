@@ -1,7 +1,7 @@
 import axios from 'axios'
 import createDropdown from './dropdown/dropdown'
 
-export const getWord = (field) => {
+const getWord = function () {
     let txt = window.getSelection() ||
               document.getSelection() ||
               document.selection.createRange()
@@ -10,9 +10,10 @@ export const getWord = (field) => {
     if (validSelection) {
         let selectionCoordinates = txt.getRangeAt(0).getBoundingClientRect()
         let url = `https://upword-server.herokuapp.com/word/${selection}`
+        let that = this
         axios.get(url).then(function (response) {
             let upwordAnchor = document.getElementById('upword-anchor')
-            let upwordDropdown = createDropdown(response.data, selectionCoordinates, field)
+            let upwordDropdown = createDropdown.call(that, response.data, selectionCoordinates)
             console.log(upwordDropdown)
             upwordAnchor.appendChild(upwordDropdown)
         })
@@ -20,6 +21,10 @@ export const getWord = (field) => {
 }
 
 export const getFieldsAndAddEventListeners = (queryString) => {
+    function Field (field) {
+        this.field = field
+        this.getWord = getWord
+    }
     let fields = document.querySelectorAll(queryString)
     let event = 'select'
     if (queryString === 'div[contenteditable="true"]') {
@@ -27,9 +32,8 @@ export const getFieldsAndAddEventListeners = (queryString) => {
     }
     if (fields.length > 0) {
         fields.forEach(field => {
-            field.addEventListener(event, function () {
-                getWord(this)
-            })
+        let fld = new Field(field)
+            field.addEventListener(event, fld.getWord)
         })
     }
 }

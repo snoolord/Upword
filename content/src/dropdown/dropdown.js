@@ -1,9 +1,10 @@
 import createDropdownTabsAndInfo from './dropdown-tabs'
 
-const createDropdown = (wordInfo, selectionCoordinates) => {
-    console.log(wordInfo)
+const createDropdown = function (wordInfo, selectionCoordinates) {
     let upwordDropdown = document.createElement('div')
-
+    console.log(wordInfo)
+    console.log(selectionCoordinates)
+    console.log(this)
     upwordDropdown.setAttribute('class', 'upword-dropdown')
     // if (selectionCoordinates.bottom) {
     upwordDropdown.style.top = window.pageYOffset + selectionCoordinates.bottom + 'px'
