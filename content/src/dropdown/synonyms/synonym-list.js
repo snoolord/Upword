@@ -6,6 +6,11 @@ const createSynonymsList = (synonyms) => {
         let synonym = document.createElement('div')
         synonym.setAttribute('class', 'synonym')
         synonym.innerHTML = synonyms[i]
+        synonym.addEventListener('click', function (e) {
+            console.log('hello')
+            document.execCommand('delete')
+            document.execCommand('insertText', false, synonyms[i])
+        })
         synonymsContainer.appendChild(synonym)
     }
     return synonymsContainer

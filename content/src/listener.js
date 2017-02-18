@@ -5,20 +5,10 @@ export const getWord = () => {
     let txt = window.getSelection() ||
               document.getSelection() ||
               document.selection.createRange()
-
     let selection = txt.toString().toLowerCase()
-    console.log(selection)
-    // if (selection) {
-    //     selectionCoordinates = getTextBoundingRect();
-    //     console.log(selectionCoordinates);
-    // }
-    //
     let validSelection = selection.trim().length > 0
     if (validSelection) {
         let selectionCoordinates = txt.getRangeAt(0).getBoundingClientRect()
-        // if (!selectionCoordinates.bottom) {
-        //     selectionCoordinates = getTextBoundingRect();
-        // }
         let url = `https://upword-server.herokuapp.com/word/${selection}`
         axios.get(url).then(function (response) {
             let upwordAnchor = document.getElementById('upword-anchor')
