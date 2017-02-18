@@ -5,8 +5,8 @@ export const mutationObserver = () => {
     var observer = new MutationObserver(function (mutations, obs) {
         // fired when a mutation occurs
         getFieldsAndAddEventListeners('div[contenteditable="true"]')
-        getFieldsAndAddEventListeners('input')
-        getFieldsAndAddEventListeners('textarea')
+        // getFieldsAndAddEventListeners('input')
+        // getFieldsAndAddEventListeners('textarea')
         // ...
     })
     // define what element should be observed by the observer

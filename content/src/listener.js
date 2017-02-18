@@ -1,7 +1,7 @@
 import axios from 'axios'
 import createDropdown from './dropdown/dropdown'
 
-export const getWord = () => {
+export const getWord = (field) => {
     let txt = window.getSelection() ||
               document.getSelection() ||
               document.selection.createRange()
@@ -12,7 +12,7 @@ export const getWord = () => {
         let url = `https://upword-server.herokuapp.com/word/${selection}`
         axios.get(url).then(function (response) {
             let upwordAnchor = document.getElementById('upword-anchor')
-            let upwordDropdown = createDropdown(response.data, selectionCoordinates)
+            let upwordDropdown = createDropdown(response.data, selectionCoordinates, field)
             console.log(upwordDropdown)
             upwordAnchor.appendChild(upwordDropdown)
         })
@@ -27,7 +27,9 @@ export const getFieldsAndAddEventListeners = (queryString) => {
     }
     if (fields.length > 0) {
         fields.forEach(field => {
-            field.addEventListener(event, getWord)
+            field.addEventListener(event, function () {
+                getWord(this)
+            })
         })
     }
 }
