@@ -1,7 +1,6 @@
 import createSynonymsList from './synonyms/synonym-list'
 
-const createList = (partOfSpeech, definitions) => {
-    console.log(definitions)
+const createList = (field, partOfSpeech, definitions) => {
     let partOfSpeechList = document.createElement('div')
     partOfSpeechList.setAttribute('id', `${partOfSpeech}-list`)
     partOfSpeechList.setAttribute('class', `part-of-speech-list`)
@@ -12,14 +11,14 @@ const createList = (partOfSpeech, definitions) => {
         let definitionLine = document.createElement('div')
         definitionLine.setAttribute('class', 'definition-line')
         definitionLine.innerHTML = currDef.definition
-        definitionLine.addEventListener('click', function () {
+        definitionLine.addEventListener('mouseover', function () {
             let activeList = document.getElementsByClassName('synonyms-container active')[0]
             if (activeList) {
                 activeList.classList.remove('active')
             }
             this.childNodes[0].classList.add('active')
         })
-        let synonymsList = createSynonymsList(currDef.synonyms)
+        let synonymsList = createSynonymsList(field, currDef.synonyms)
         definitionLine.insertBefore(synonymsList, definitionLine.childNodes[0])
 
         partOfSpeechList.appendChild(definitionLine)

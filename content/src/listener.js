@@ -7,6 +7,7 @@ const getWord = function () {
               document.selection.createRange()
     let selection = txt.toString().toLowerCase()
     let validSelection = selection.trim().length > 0
+    console.log(this)
     if (validSelection) {
         let selectionCoordinates = txt.getRangeAt(0).getBoundingClientRect()
         let url = `https://upword-server.herokuapp.com/word/${selection}`

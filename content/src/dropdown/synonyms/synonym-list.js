@@ -1,5 +1,4 @@
-const createSynonymsList = (synonyms) => {
-    console.log(synonyms)
+const createSynonymsList = (field, synonyms) => {
     let synonymsContainer = document.createElement('div')
     synonymsContainer.setAttribute('class', 'synonyms-container')
     for (let i = 0; i < synonyms.length; i++) {
@@ -7,11 +6,11 @@ const createSynonymsList = (synonyms) => {
         synonym.setAttribute('class', 'synonym')
         synonym.innerHTML = synonyms[i]
         synonym.addEventListener('click', function (e) {
-            let field = document.getElementById(':nn')
             console.log(field)
             field.focus()
             document.execCommand('delete')
             document.execCommand('insertText', false, synonyms[i])
+            document.getElementsByClassName('upword-dropdown')[0].remove()
         })
         synonymsContainer.appendChild(synonym)
     }

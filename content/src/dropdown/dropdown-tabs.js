@@ -1,6 +1,7 @@
 import createList from './dropdown-list'
 
-const createDropdownTabsAndInfo = (dropdownContainer, wordInfo) => {
+const createDropdownTabsAndInfo = (field, dropdownContainer, wordInfo) => {
+    console.log(dropdownContainer, wordInfo)
     let dropdownButtons = document.createElement('div')
     dropdownButtons.setAttribute('class', 'pos-buttons')
     let lists = []
@@ -20,7 +21,7 @@ const createDropdownTabsAndInfo = (dropdownContainer, wordInfo) => {
                 document.getElementById(`${this.innerHTML}-list`).classList.add('active')
                 this.classList.add('active')
             })
-            let list = createList(partOfSpeech, wordInfo[partOfSpeech])
+            let list = createList(field, partOfSpeech, wordInfo[partOfSpeech])
             if (first === 0) {
                 partOfSpeechButton.classList.add('active')
                 list.classList.add('active')
