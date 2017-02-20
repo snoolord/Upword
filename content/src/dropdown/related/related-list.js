@@ -6,10 +6,14 @@ const createRelatedList = (field, relatedWords) => {
         wordA.setAttribute('class', 'related-word-link')
         // wordA.setAttribute('href', `http://www.dictionary.com/browse/${relatedWords[i]}?s=t`)
         wordA.addEventListener('click', function () {
+            // TODO: find out how to change the word in the innerHTML on hover
+            // need to set the selection
             field.focus()
             document.execCommand('delete')
             document.execCommand('insertText', false, relatedWords[i])
-            document.getElementsByClassName('upword-dropdown')[0].remove()
+            // let range = document.createRange()
+            let offset = field.innerHTML.length
+            // document.getElementsByClassName('upword-dropdown')[0].remove()
         })
 
         wordA.addEventListener('mouseover', function () {

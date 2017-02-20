@@ -6,8 +6,13 @@ const getWord = function () {
               document.getSelection() ||
               document.selection.createRange()
     let selection = txt.toString().toLowerCase()
+    this.sel = txt
     let validSelection = selection.trim().length > 0
+
     if (validSelection) {
+        this.selectedWord = selection
+        this.selectionStart = this.sel.anchorOffset
+        this.selectionEnd = this.sel.focusOffset
         let selectionCoordinates = txt.getRangeAt(0).getBoundingClientRect()
         let url = 'https://upword-server.herokuapp.com/word/'
         let that = this
@@ -45,7 +50,7 @@ export const getFieldsAndAddEventListeners = (queryString) => {
     if (fields.length > 0) {
         fields.forEach(field => {
         let fld = new Field(field)
-            field.addEventListener(event, fld.getWord)
+            fld.field.addEventListener(event, fld.getWord.bind(fld))
         })
     }
 }

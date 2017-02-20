@@ -2,7 +2,7 @@ import createList from './dropdown-list'
 import createRelatedList from './related/related-list'
 
 const createDropdownTabsAndInfo = (field, dropdownContainer, wordInfo) => {
-    // console.log(dropdownContainer, wordInfo)
+    console.log(field)
     let dropdownButtons = document.createElement('div')
     dropdownButtons.setAttribute('class', 'pos-buttons')
     let lists = []
