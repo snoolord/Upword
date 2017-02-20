@@ -23,6 +23,7 @@ const getWord = function () {
             axios.post(url, {
                 word: selection
             }).then(function (response) {
+                console.log(response.data)
                 let upwordAnchor = document.getElementById('upword-anchor')
                 let upwordDropdown = createDropdown.call(that, response.data, selectionCoordinates)
                 upwordAnchor.appendChild(upwordDropdown)

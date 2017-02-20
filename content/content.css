@@ -1,12 +1,13 @@
 .upword-dropdown {
-  /*display: none;*/
-  position: absolute;
-  background: white;
-  color: black;
-  z-index: 999;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-  box-shadow: 1px 5px 5px 1px rgba(100,100,100,.2);
+    /*display: none;*/
+    position: absolute;
+    background: white;
+    color: black;
+    z-index: 999;
+    max-width: 300px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    box-shadow: 1px 5px 5px 1px rgba(100,100,100,.2);
 }
 
 .pos-buttons {
@@ -45,32 +46,49 @@
     top: 0;
 
 }
+#related {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.related-word-link {
+    display: flex;
+    flex-grow: 1;
+    font-size: 10px;
+    justify-content: center;
+    padding: 5px 10px;
+    background: #eee;
+}
+.related-word-link:hover {
+    background: rgba(96, 125, 139, 0.45)
+}
 
 #upword-anchor {
 
 }
 
 .upword-dropdown li {
-  list-style: none;
-  padding: 5px 10px;
-  cursor: pointer;
+    list-style: none;
+    padding: 5px 10px;
+    cursor: pointer;
 }
 
 .upword-dropdown li:hover {
-  background: #eee;
+    background: #eee;
 }
 
 .thesaurus-link {
-  display: block;
-  border-top: .5px solid #aaa;
-  text-decoration: none;
-  color: rgba(100,100,100,1);
-  font-size: 14px;
-  padding: 10px;
-  margin-top: 7px;
-  letter-spacing: .1px;
+    display: block;
+    border-top: .5px solid #aaa;
+    text-decoration: none;
+    color: rgba(100,100,100,1);
+    font-size: 14px;
+    padding: 10px;
+    margin-top: 7px;
+    letter-spacing: .1px;
 }
 
 .thesaurus-link:hover {
-  color: rgba(30,144,255,.8);
+    color: rgba(30,144,255,.8);
 }
