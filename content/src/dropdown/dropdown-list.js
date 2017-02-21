@@ -10,7 +10,7 @@ const createList = (field, partOfSpeech, definitions) => {
         let currDef = definitions[i]
         let definitionLine = document.createElement('div')
         definitionLine.setAttribute('class', 'definition-line')
-        definitionLine.innerHTML = currDef.definition
+        definitionLine.innerHTML = i + 1 + '. ' + currDef.definition
         definitionLine.addEventListener('mouseover', function () {
             let activeList = document.getElementsByClassName('synonyms-container active')[0]
             if (activeList) {
