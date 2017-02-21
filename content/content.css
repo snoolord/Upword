@@ -4,6 +4,7 @@
     background: white;
     color: black;
     z-index: 999;
+    font-family: 'Raleway', sans-serif;
     max-width: 300px;
 }
 
@@ -42,18 +43,38 @@
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     box-shadow: 1px 5px 5px 1px rgba(100,100,100,.2);
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 0 20px;
+}
+
+.definition-line {
+    padding: 5px 0;
 }
 
 .synonyms-container {
-    display: none;
-    position: absolute;
+    display: flex;
+    flex-wrap: wrap;
 }
-.synonyms-container.active {
-    display: block;
-    left: 100%;
-    top: 0;
 
+.synonym {
+    margin: 0 5px;
+    background-clip: content-box;
+    background: yellow;
 }
+
+.synonym:hover {
+    background-clip: content-box;
+    background: blue;
+}
+.synonym:after {
+    content: ", "
+}
+
+.synonyms-container .synonym:last-child:after {
+    content: "";
+}
+
 #related {
     display: flex;
     flex-wrap: wrap;

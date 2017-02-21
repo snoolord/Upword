@@ -11,15 +11,15 @@ const createList = (field, partOfSpeech, definitions) => {
         let definitionLine = document.createElement('div')
         definitionLine.setAttribute('class', 'definition-line')
         definitionLine.innerHTML = i + 1 + '. ' + currDef.definition
-        definitionLine.addEventListener('mouseover', function () {
-            let activeList = document.getElementsByClassName('synonyms-container active')[0]
-            if (activeList) {
-                activeList.classList.remove('active')
-            }
-            this.childNodes[0].classList.add('active')
-        })
+        // definitionLine.addEventListener('mouseover', function () {
+        //     let activeList = document.getElementsByClassName('synonyms-container active')[0]
+        //     if (activeList) {
+        //         activeList.classList.remove('active')
+        //     }
+        //     this.childNodes[0].classList.add('active')
+        // })
         let synonymsList = createSynonymsList(field, currDef.synonyms)
-        definitionLine.insertBefore(synonymsList, definitionLine.childNodes[0])
+        definitionLine.appendChild(synonymsList)
 
         partOfSpeechList.appendChild(definitionLine)
     }
