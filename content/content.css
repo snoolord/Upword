@@ -21,8 +21,16 @@
     flex-grow: 1;
     justify-content: center;
     align-items: center;
+    border-bottom: 34px solid #eee;
+	border-left: 17px solid transparent;
+	border-right: 17px solid transparent;
+	height: 0;
+	width: 100px;
 }
 
+.pos-button-text {
+    margin-top: 35px;    
+}
 .active.pos-button{
     /*background: #eee;*/
     border-bottom: 100px solid #grey;
