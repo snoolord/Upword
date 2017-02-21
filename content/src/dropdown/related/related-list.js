@@ -8,7 +8,7 @@ const createRelatedList = (field, relatedWords) => {
         wordA.addEventListener('click', function () {
             // TODO: find out how to change the word in the innerHTML on hover
             // need to set the selection
-            field.field.focus()
+            field.focus()
             // let range = document.createRange()
 
             document.execCommand('delete')
@@ -19,10 +19,10 @@ const createRelatedList = (field, relatedWords) => {
             document.getElementsByClassName('upword-dropdown')[0].remove()
         })
 
-        wordA.addEventListener('mouseover', function () {
-            let relatedWordHoverField = document.getElementById('related-word')
-            relatedWordHoverField.innerHTML = ' ' + relatedWords[i]
-        })
+        // wordA.addEventListener('mouseover', function () {
+        //     let relatedWordHoverField = document.getElementById('related-word')
+        //     relatedWordHoverField.innerHTML = ' ' + relatedWords[i]
+        // })
         wordA.innerHTML = relatedWords[i]
         relatedListContainer.appendChild(wordA)
     }

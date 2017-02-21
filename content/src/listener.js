@@ -6,11 +6,10 @@ const getWord = function () {
               document.getSelection() ||
               document.selection.createRange()
     let selection = txt.toString().toLowerCase()
-    this.sel = txt
+    // this.sel = txt
     let validSelection = selection.trim().length > 0
 
     if (validSelection) {
-        console.log("what")
         // this.selectedWord = selection
         // this.selectionStart = this.sel.anchorOffset
         // this.selectionEnd = this.sel.focusOffset
@@ -51,7 +50,7 @@ export const getFieldsAndAddEventListeners = (queryString) => {
     if (fields.length > 0) {
         fields.forEach(field => {
         let fld = new Field(field)
-            field.addEventListener(event, fld.getWord.bind(fld))
+            field.addEventListener(event, fld.getWord)
         })
     }
 }

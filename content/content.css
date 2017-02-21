@@ -21,11 +21,11 @@
     flex-grow: 1;
     justify-content: center;
     align-items: center;
-    padding: 5px;
 }
 
 .active.pos-button{
-    background: #eee;
+    /*background: #eee;*/
+    border-bottom: 100px solid #grey;
 }
 
 .part-of-speech-list {
