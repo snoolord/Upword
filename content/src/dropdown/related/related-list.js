@@ -19,10 +19,10 @@ const createRelatedList = (field, relatedWords) => {
             document.getElementsByClassName('upword-dropdown')[0].remove()
         })
 
-        // wordA.addEventListener('mouseover', function () {
-        //     let relatedWordHoverField = document.getElementById('related-word')
-        //     relatedWordHoverField.innerHTML = ' ' + relatedWords[i]
-        // })
+        wordA.addEventListener('mouseover', function () {
+            let relatedWordHoverField = document.getElementById('related-word')
+            relatedWordHoverField.innerHTML = ' ' + relatedWords[i]
+        })
         wordA.innerHTML = relatedWords[i]
         relatedListContainer.appendChild(wordA)
     }

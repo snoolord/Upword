@@ -1,7 +1,6 @@
 .upword-dropdown {
     /*display: none;*/
     position: absolute;
-    background: white;
     color: black;
     z-index: 999;
     font-family: 'Raleway', sans-serif;
@@ -11,7 +10,6 @@
 .pos-buttons {
     display: flex;
     justify-content: space-around;
-    box-shadow: 0 1.5px 2px -2px gray;
 }
 
 .pos-button {
@@ -19,19 +17,27 @@
     flex-grow: 1;
     justify-content: center;
     align-items: center;
-    border-bottom: 34px solid #eee;
-	border-left: 17px solid transparent;
-	border-right: 17px solid transparent;
+    border-bottom: 30px solid #eee;
+	border-left: 15px solid transparent;
+	border-right: 15px solid transparent;
 	height: 0;
 	width: 100px;
 }
 
+#related-button {
+    border-bottom: 30px solid rgb(227, 132, 22);
+}
+#related-word {
+    margin-top: 30px;
+    padding-left: 7px;
+    color: yellow;
+}
 .pos-button-text {
-    margin-top: 35px;
+    margin-top: 30px;
 }
 .active.pos-button{
     /*background: #eee;*/
-    border-bottom: 34px solid grey;
+    border-bottom: 30px solid rgb(255,246,151);
 }
 
 .part-of-speech-list {
@@ -40,9 +46,10 @@
 
 .part-of-speech-list.active {
     display: block;
+    background: rgb(255,246,151);
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
-    box-shadow: 1px 5px 5px 1px rgba(100,100,100,.2);
+    box-shadow: 0px 5px 5px 0px rgba(100,100,100,.2);
     max-height: 300px;
     overflow-y: auto;
     padding: 0 20px;
@@ -59,13 +66,16 @@
 
 .synonym {
     margin: 0 5px;
+    padding: 2px;
     background-clip: content-box;
-    background: yellow;
+    background: #A9DEF9;
+    cursor: pointer;
 }
 
 .synonym:hover {
     background-clip: content-box;
-    background: blue;
+    background: #A1CDA8;
+    color: white;
 }
 .synonym:after {
     content: ", "
