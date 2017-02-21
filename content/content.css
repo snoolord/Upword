@@ -24,12 +24,12 @@
 }
 
 #related-button {
-    border-bottom: 30px solid rgb(227, 132, 22);
+    border-bottom: 30px solid #E3D4FE;
 }
 #related-word {
     margin-top: 30px;
     padding-left: 7px;
-    color: yellow;
+    color: #faff00;
 }
 .pos-button-text {
     margin-top: 30px;
@@ -91,7 +91,7 @@
     color: white;
 }
 .synonym:after {
-    content: ", "
+    content: ", ";
 }
 
 .synonyms-container .synonym:last-child:after {
@@ -100,20 +100,35 @@
 
 #related {
     display: flex;
+    background: white;
+    /*background: rgb(255,246,151);*/
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    box-shadow: 0px 5px 5px 0px rgba(100,100,100,.2);
+    max-height: 300px;
+    overflow-y: auto;
     flex-wrap: wrap;
-    justify-content: space-between;
 }
-
 .related-word-link {
     display: flex;
-    flex-grow: 1;
-    font-size: 10px;
+    font-size: 12px;
     justify-content: center;
-    padding: 5px 10px;
+    margin: 0 5px;
+    padding: 2px;
+    background-clip: content-box;
     background: #eee;
 }
+.related-word-link:after {
+    content: ", ";
+}
+
+#related .related-word-link:last-child:after {
+    content: "";
+}
+
 .related-word-link:hover {
-    background: rgba(96, 125, 139, 0.45)
+    background-clip: content-box;
+    background: rgba(96, 125, 139, 0.45);
 }
 
 #upword-anchor {
@@ -128,19 +143,4 @@
 
 .upword-dropdown li:hover {
     background: #eee;
-}
-
-.thesaurus-link {
-    display: block;
-    border-top: .5px solid #aaa;
-    text-decoration: none;
-    color: rgba(100,100,100,1);
-    font-size: 14px;
-    padding: 10px;
-    margin-top: 7px;
-    letter-spacing: .1px;
-}
-
-.thesaurus-link:hover {
-    color: rgba(30,144,255,.8);
 }
