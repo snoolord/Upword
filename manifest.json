@@ -25,6 +25,7 @@
                "*://mail.google.com/*",
                "storage",
                "http://fonts.googleapis.com/",
-               "https://fonts.googleapis.com/"
+               "https://fonts.googleapis.com/",
+               "contextMenus"
   ]
 }

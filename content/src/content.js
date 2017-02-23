@@ -1,4 +1,5 @@
 import { mutationObserver } from './mutation-observer'
+import {getWord} from './listener';
 
 console.log('JavaScript successfully injected')
 mutationObserver()

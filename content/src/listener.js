@@ -1,20 +1,28 @@
 import axios from 'axios'
 import createDropdown from './dropdown/dropdown'
 
-const getWord = function () {
+chrome.extension.onMessage.addListener(function (message, sender, callback) {
+    if (message.functiontoInvoke == "getWord") {
+        getWord();
+    }
+    if (message.functiontoInvoke == "showAnotherInfo") {
+        showAnotherInfo();
+    }
+});
+export const getWord = function () {
     let txt = window.getSelection() ||
               document.getSelection() ||
               document.selection.createRange()
     let selection = txt.toString().toLowerCase()
-    // this.sel = txt
     let validSelection = selection.trim().length > 0
-
+    console.log(txt, selection)
     if (validSelection) {
         // this.selectedWord = selection
         // this.selectionStart = this.sel.anchorOffset
         // this.selectionEnd = this.sel.focusOffset
         let selectionCoordinates = txt.getRangeAt(0).getBoundingClientRect()
         let url = 'https://upword-server.herokuapp.com/word/'
+        console.log(url + selection)
         let that = this
         axios.get(url + selection, {
             validateStatus: function (status) {
