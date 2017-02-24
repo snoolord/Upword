@@ -1,6 +1,7 @@
 import axios from 'axios'
 import createDropdown from './dropdown/dropdown'
 import { Selection } from './util'
+import { positionDropdown } from './dropdown/dropdown-sizing'
 
 let selectionFunctions = Selection()
 let currField = {
@@ -27,9 +28,6 @@ export const getWord = function () {
     let txt = window.getSelection() ||
               document.getSelection() ||
               document.selection.createRange()
-    // if (txt.baseNode.parentNode !== this.field ) {
-    //     console.log('hi')
-    // }
     if (this.field) {
         this.savedSelection = this.saveSelection(this.field)
     }
@@ -37,9 +35,6 @@ export const getWord = function () {
     console.log(this.selection)
     let validSelection = this.selection.trim().length > 0
     if (validSelection) {
-        // this.selectedWord = selection
-        // this.selectionStart = this.sel.anchorOffset
-        // this.selectionEnd = this.sel.focusOffset
         let selectionCoordinates = txt.getRangeAt(0).getBoundingClientRect()
         let url = 'https://upword-server.herokuapp.com/word/'
         const that = this
@@ -51,6 +46,9 @@ export const getWord = function () {
             let upwordAnchor = document.getElementById('upword-anchor')
             let upwordDropdown = createDropdown.call(that, response.data, selectionCoordinates)
             upwordAnchor.appendChild(upwordDropdown)
+            positionDropdown(upwordDropdown, selectionCoordinates)
+            console.log(upwordDropdown.offsetWidth, upwordDropdown.offsetHeight)
+
         }).catch(function () {
             axios.post(url, {
                 word: that.selection
@@ -58,6 +56,7 @@ export const getWord = function () {
                 let upwordAnchor = document.getElementById('upword-anchor')
                 let upwordDropdown = createDropdown.call(that, response.data, selectionCoordinates)
                 upwordAnchor.appendChild(upwordDropdown)
+                console.log(upwordDropdown.offsetWidth, upwordDropdown.offsetHeight)
             })
         })
     }
