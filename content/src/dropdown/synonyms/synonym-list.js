@@ -5,13 +5,14 @@ const createSynonymsList = (field, synonyms) => {
         let synonym = document.createElement('div')
         synonym.setAttribute('class', 'synonym')
         synonym.innerHTML = synonyms[i]
-        if (document.activeElement !== document.body) {
+        if (field.field) {
             synonym.addEventListener('click', function (e) {
                 field.field.focus()
                 document.execCommand('delete')
                 document.execCommand('insertText', false, synonyms[i])
                 document.getElementsByClassName('upword-dropdown')[0].remove()
             })
+
         }
         synonymsContainer.appendChild(synonym)
     }

@@ -6,7 +6,6 @@ let currField = {
     field: null,
     setCurrField: function(field) {
         this.field = field
-        console.log(this.field)
     }
 }
 
@@ -21,6 +20,9 @@ export const getWord = function () {
     let txt = window.getSelection() ||
               document.getSelection() ||
               document.selection.createRange()
+    // if (txt.baseNode.parentNode !== this.field ) {
+    //     console.log('hi')
+    // }
     let selection = txt.toString().toLowerCase()
     let validSelection = selection.trim().length > 0
     if (validSelection) {
