@@ -1,10 +1,12 @@
 import axios from 'axios'
 import createDropdown from './dropdown/dropdown'
 
+
 let currField = {
     field: null,
     setCurrField: function(field) {
         this.field = field
+        console.log(this.field)
     }
 }
 
@@ -62,10 +64,6 @@ export const getFieldsAndAddEventListeners = (queryString) => {
         fields.forEach( field => {
             field.addEventListener('focus', function () {
                 currField.setCurrField(this)
-                console.log(document.activeElement)
-                // field.addEventListener('focusout', function () {
-                //
-                // })
             })
         })
     }

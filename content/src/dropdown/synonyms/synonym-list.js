@@ -5,9 +5,8 @@ const createSynonymsList = (field, synonyms) => {
         let synonym = document.createElement('div')
         synonym.setAttribute('class', 'synonym')
         synonym.innerHTML = synonyms[i]
-        if (field.field) {
+        if (document.activeElement !== document.body) {
             synonym.addEventListener('click', function (e) {
-                console.log(field)
                 field.field.focus()
                 document.execCommand('delete')
                 document.execCommand('insertText', false, synonyms[i])
