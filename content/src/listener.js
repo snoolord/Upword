@@ -23,6 +23,7 @@ export const getWord = function () {
     // if (txt.baseNode.parentNode !== this.field ) {
     //     console.log('hi')
     // }
+    console.log(txt)
     let selection = txt.toString().toLowerCase()
     let validSelection = selection.trim().length > 0
     if (validSelection) {

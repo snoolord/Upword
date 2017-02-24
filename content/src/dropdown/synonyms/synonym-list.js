@@ -8,8 +8,8 @@ const createSynonymsList = (field, synonyms) => {
         if (field.field) {
             synonym.addEventListener('click', function (e) {
                 field.field.focus()
-                document.execCommand('delete')
-                document.execCommand('insertText', false, synonyms[i])
+                // document.execCommand('delete')
+                // document.execCommand('insertText', false, synonyms[i])
                 document.getElementsByClassName('upword-dropdown')[0].remove()
             })
 
