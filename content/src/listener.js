@@ -1,29 +1,33 @@
 import axios from 'axios'
 import createDropdown from './dropdown/dropdown'
 
+let currField = {
+    field: null,
+    setCurrField: function(field) {
+        this.field = field
+    }
+}
+
 chrome.extension.onMessage.addListener(function (message, sender, callback) {
     if (message.functiontoInvoke == "getWord") {
         getWord();
     }
-    if (message.functiontoInvoke == "showAnotherInfo") {
-        showAnotherInfo();
-    }
-});
+})
+
+
 export const getWord = function () {
     let txt = window.getSelection() ||
               document.getSelection() ||
               document.selection.createRange()
     let selection = txt.toString().toLowerCase()
     let validSelection = selection.trim().length > 0
-    console.log(txt, selection)
     if (validSelection) {
         // this.selectedWord = selection
         // this.selectionStart = this.sel.anchorOffset
         // this.selectionEnd = this.sel.focusOffset
         let selectionCoordinates = txt.getRangeAt(0).getBoundingClientRect()
         let url = 'https://upword-server.herokuapp.com/word/'
-        console.log(url + selection)
-        let that = this
+        const that = this
         axios.get(url + selection, {
             validateStatus: function (status) {
                 return status >= 200 && status < 300
@@ -36,29 +40,33 @@ export const getWord = function () {
             axios.post(url, {
                 word: selection
             }).then(function (response) {
-                console.log(response.data)
                 let upwordAnchor = document.getElementById('upword-anchor')
                 let upwordDropdown = createDropdown.call(that, response.data, selectionCoordinates)
                 upwordAnchor.appendChild(upwordDropdown)
             })
         })
     }
-}
+}.bind(currField)
+
+
+
 
 export const getFieldsAndAddEventListeners = (queryString) => {
-    function Field (field) {
-        this.field = field
-        this.getWord = getWord
-    }
+
     let fields = document.querySelectorAll(queryString)
     let event = 'select'
     if (queryString === 'div[contenteditable="true"]') {
         event = 'dblclick'
     }
     if (fields.length > 0) {
-        fields.forEach(field => {
-        let fld = new Field(field)
-            field.addEventListener(event, fld.getWord)
+        fields.forEach( field => {
+            field.addEventListener('focus', function () {
+                currField.setCurrField(this)
+                console.log(document.activeElement)
+                // field.addEventListener('focusout', function () {
+                //
+                // })
+            })
         })
     }
 }
