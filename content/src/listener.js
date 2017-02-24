@@ -1,13 +1,20 @@
 import axios from 'axios'
 import createDropdown from './dropdown/dropdown'
+import { Selection } from './util'
 
-
+let selectionFunctions = Selection()
 let currField = {
+    selection: null,
     field: null,
+    savedSelection: null,
     setCurrField: function(field) {
         this.field = field
-    }
+    },
+    saveSelection: selectionFunctions.saveSelection,
+    restoreSelection: selectionFunctions.restoreSelection
 }
+
+
 
 chrome.extension.onMessage.addListener(function (message, sender, callback) {
     if (message.functiontoInvoke == "getWord") {
@@ -23,9 +30,10 @@ export const getWord = function () {
     // if (txt.baseNode.parentNode !== this.field ) {
     //     console.log('hi')
     // }
-    console.log(txt)
-    let selection = txt.toString().toLowerCase()
-    let validSelection = selection.trim().length > 0
+    this.savedSelection = this.saveSelection(this.field)
+    this.selection = txt.toString().toLowerCase()
+    console.log(this.selection)
+    let validSelection = this.selection.trim().length > 0
     if (validSelection) {
         // this.selectedWord = selection
         // this.selectionStart = this.sel.anchorOffset
@@ -33,7 +41,7 @@ export const getWord = function () {
         let selectionCoordinates = txt.getRangeAt(0).getBoundingClientRect()
         let url = 'https://upword-server.herokuapp.com/word/'
         const that = this
-        axios.get(url + selection, {
+        axios.get(url + this.selection, {
             validateStatus: function (status) {
                 return status >= 200 && status < 300
             }
@@ -43,7 +51,7 @@ export const getWord = function () {
             upwordAnchor.appendChild(upwordDropdown)
         }).catch(function () {
             axios.post(url, {
-                word: selection
+                word: that.selection
             }).then(function (response) {
                 let upwordAnchor = document.getElementById('upword-anchor')
                 let upwordDropdown = createDropdown.call(that, response.data, selectionCoordinates)
