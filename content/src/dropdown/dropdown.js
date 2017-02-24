@@ -5,6 +5,7 @@ const createDropdown = function (wordInfo, selectionCoordinates) {
     // console.log(this.offsetWidth)
 
     upwordDropdown.style.width = Math.floor(this.offsetWidth * 0.8) + 'px'
+
     window.addEventListener('click', function (e) {
         if (e.target !== upwordDropdown && !upwordDropdown.contains(e.target)) {
             upwordDropdown.remove()

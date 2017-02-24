@@ -18,6 +18,9 @@ export const Selection = function()  {
 
         restoreSelection = function(containerEl, savedSel) {
             var charIndex = 0, range = document.createRange();
+            if (!range) {
+                return;
+            }
             range.setStart(containerEl, 0);
             range.collapse(true);
             var nodeStack = [containerEl], node, foundStart = false, stop = false;

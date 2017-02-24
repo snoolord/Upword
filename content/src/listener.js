@@ -30,7 +30,9 @@ export const getWord = function () {
     // if (txt.baseNode.parentNode !== this.field ) {
     //     console.log('hi')
     // }
-    this.savedSelection = this.saveSelection(this.field)
+    if (this.field) {
+        this.savedSelection = this.saveSelection(this.field)
+    }
     this.selection = txt.toString().toLowerCase()
     console.log(this.selection)
     let validSelection = this.selection.trim().length > 0
