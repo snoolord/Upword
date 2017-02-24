@@ -47,8 +47,6 @@ export const getWord = function () {
             let upwordDropdown = createDropdown.call(that, response.data, selectionCoordinates)
             upwordAnchor.appendChild(upwordDropdown)
             positionDropdown(upwordDropdown, selectionCoordinates)
-            console.log(upwordDropdown.offsetWidth, upwordDropdown.offsetHeight)
-
         }).catch(function () {
             axios.post(url, {
                 word: that.selection
@@ -56,7 +54,7 @@ export const getWord = function () {
                 let upwordAnchor = document.getElementById('upword-anchor')
                 let upwordDropdown = createDropdown.call(that, response.data, selectionCoordinates)
                 upwordAnchor.appendChild(upwordDropdown)
-                console.log(upwordDropdown.offsetWidth, upwordDropdown.offsetHeight)
+                positionDropdown(upwordDropdown, selectionCoordinates)
             })
         })
     }
