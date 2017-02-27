@@ -2,7 +2,7 @@
     position: absolute;
     color: black;
     z-index: 999;
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Catamaran', sans-serif;
     max-width: 50%;
 }
 
@@ -37,7 +37,8 @@
 }
 .active.pos-button{
     /*background: #eee;*/
-    border-bottom: 30px solid #ffeeba;
+    border-bottom: 30px solid #ccedea;
+    text-decoration: underline;
 }
 
 .part-of-speech-list {
@@ -46,7 +47,8 @@
 
 .part-of-speech-list.active {
     display: block;
-    background: #ffeeba;
+    padding-top: 5px;
+    background: #ccedea;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     box-shadow: 0px 5px 5px 0px rgba(100,100,100,.2);
@@ -79,18 +81,26 @@
 }
 
 .synonym {
-    margin: 0 5px;
-    padding: 3px;
+    margin: 2px 5px;
+    padding: 0 4px;
     border-radius: 7px;
     background-clip: content-box;
-    background: rgba(255, 177, 157, 0.71);
+    background: #ffeeba;
+    background: ghostwhite;
+    opacity: .85;
     cursor: pointer;
 }
 
 .synonym:hover {
     background-clip: content-box;
-    background: #A1CDA8;
-    color: white;
+    padding: 0 4px;
+    margin: 2px 5px;
+    background: cornsilk;
+    /*background: #A1CDA8;
+    background: rgba(255, 177, 157, 0.71);*/
+    /*background: #bfcfe4;*/
+    opacity: 1;
+
 }
 .synonym:after {
     content: ", ";

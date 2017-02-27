@@ -30,7 +30,7 @@ export const getWord = function () {
               document.getSelection() ||
               document.selection.createRange()
     if (this.field) {
-        if (txt.anchorOffset === 0 ) {
+        if (txt.anchorOffset === 0 && txt.focusNode.parentElement.previousElementSibling) {
             this.firstWord = true
         } else {
             this.firstWord = false
