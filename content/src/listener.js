@@ -11,6 +11,7 @@ let currField = {
     setCurrField: function(field) {
         this.field = field
     },
+    firstWord: false,
     saveSelection: selectionFunctions.saveSelection,
     restoreSelection: selectionFunctions.restoreSelection
 }
@@ -29,7 +30,13 @@ export const getWord = function () {
               document.getSelection() ||
               document.selection.createRange()
     if (this.field) {
+        if (txt.anchorOffset === 0 ) {
+            this.firstWord = true
+        } else {
+            this.firstWord = false
+        }
         this.savedSelection = this.saveSelection(this.field)
+        console.log(this.savedSelection)
     }
     this.selection = txt.toString().toLowerCase()
 
