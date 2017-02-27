@@ -9,8 +9,12 @@ const createSynonymsList = (field, synonyms) => {
             synonym.addEventListener('click', function (e) {
                 field.field.focus()
                 field.restoreSelection(field.field, field.savedSelection)
-                document.execCommand('delete')
+                if (field.firstWord) {
+                    document.execCommand('insertParagraph', false)
+                }
                 document.execCommand('insertText', false, synonyms[i])
+
+                // document.execCommand('delete')
                 document.getElementsByClassName('upword-dropdown')[0].remove()
             })
 
@@ -22,7 +26,10 @@ const createSynonymsList = (field, synonyms) => {
                     end: field.savedSelection.start + synonyms[i].length
                 }
                 field.savedSelection = newSelection
-                document.execCommand('delete')
+                // document.execCommand('delete')
+                if (field.firstWord) {
+                    document.execCommand('insertParagraph', false)
+                }
                 document.execCommand('insertText', false, synonyms[i])
             })
 
@@ -34,7 +41,10 @@ const createSynonymsList = (field, synonyms) => {
                     end: field.savedSelection.start + field.selection.length
                 }
                 field.savedSelection = newSelection
-                document.execCommand('delete')
+                // document.execCommand('delete')
+                if (field.firstWord) {
+                    document.execCommand('insertParagraph', false)
+                }
                 document.execCommand('insertText', false, field.selection)
             })
         }

@@ -19,17 +19,17 @@ const createRelatedList = (field, relatedWords) => {
                 // range.setEnd(field.field, field.selectionStart + relatedWords[i].length)
                 document.getElementsByClassName('upword-dropdown')[0].remove()
             })
-            wordA.addEventListener('mouseover', function () {
-                field.field.focus()
-                field.restoreSelection(field.field, field.savedSelection)
-                let newSelection = {
-                    start: field.savedSelection.start,
-                    end: field.savedSelection.start + relatedWords[i].length
-                }
-                field.savedSelection = newSelection
-                document.execCommand('delete')
-                document.execCommand('insertText', false, relatedWords[i])
-            })
+            // wordA.addEventListener('mouseover', function () {
+            //     field.field.focus()
+            //     field.restoreSelection(field.field, field.savedSelection)
+            //     let newSelection = {
+            //         start: field.savedSelection.start,
+            //         end: field.savedSelection.start + relatedWords[i].length
+            //     }
+            //     field.savedSelection = newSelection
+            //     document.execCommand('delete')
+            //     document.execCommand('insertText', false, relatedWords[i])
+            // })
 
             wordA.addEventListener('mouseout', function () {
                 field.field.focus()
