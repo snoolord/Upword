@@ -37,7 +37,7 @@
 }
 .active.pos-button{
     /*background: #eee;*/
-    border-bottom: 30px solid rgb(255,246,151);
+    border-bottom: 30px solid #ffeeba;
 }
 
 .part-of-speech-list {
@@ -46,7 +46,7 @@
 
 .part-of-speech-list.active {
     display: block;
-    background: rgb(255,246,151);
+    background: #ffeeba;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     box-shadow: 0px 5px 5px 0px rgba(100,100,100,.2);
@@ -80,9 +80,10 @@
 
 .synonym {
     margin: 0 5px;
-    padding: 2px;
+    padding: 3px;
+    border-radius: 7px;
     background-clip: content-box;
-    background: #A9DEF9;
+    background: rgba(255, 177, 157, 0.71);
     cursor: pointer;
 }
 

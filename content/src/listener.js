@@ -32,6 +32,7 @@ export const getWord = function () {
         this.savedSelection = this.saveSelection(this.field)
     }
     this.selection = txt.toString().toLowerCase()
+
     console.log(this.selection)
     let validSelection = this.selection.trim().length > 0
     if (validSelection) {
