@@ -3,6 +3,9 @@
 }
 
 body {
+    background: cornsilk;
   text-align: center;
+  width: 400px;
+  font-size: 14px;
   font-family: 'Raleway', sans-serif;
 }

@@ -38,7 +38,7 @@ export const getWord = function () {
         this.savedSelection = this.saveSelection(this.field)
         console.log(this.savedSelection)
     }
-    this.selection = txt.toString().toLowerCase()
+    this.selection = txt.toString()
 
     console.log(this.selection)
     let validSelection = this.selection.trim().length > 0
@@ -46,7 +46,7 @@ export const getWord = function () {
         let selectionCoordinates = txt.getRangeAt(0).getBoundingClientRect()
         let url = 'https://upword-server.herokuapp.com/word/'
         const that = this
-        axios.get(url + this.selection, {
+        axios.get(url + this.selection.toLowerCase(), {
             validateStatus: function (status) {
                 return status >= 200 && status < 300
             }
