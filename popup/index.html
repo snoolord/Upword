@@ -4,16 +4,26 @@
     <meta charset="utf-8">
     <title>Upword</title>
     <link rel="stylesheet" href="./src/popup.css" media="screen" title="no title">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Catamaran">
   </head>
   <body>
     <div id="upword-popup">
-
-        <img src='../../docs/icons/48.png'/>
-        <h1 class='upword-header'>Upword <br/> by <br/> <a href="https://www.linkedin.com/in/winstonjzhao/">Winston Zhao</a></h1>
+        <div class="header-container">
+            <img id='upword-logo' src='../../docs/icons/48.png' style="height: 80%;"/>
+            <div class="contact-info">
+                <h1 class='upword-header' style='margin: 0;'><a id='winston-zhao' >Winston Zhao</a></h1>
+                <div class="social-links" style='width: 54px; margin: 0 auto;'>
+                    <img src="../../docs/icons/linkedin.gif" style="width: 25px;" id='linked-in'/>
+                    <img src="../../docs/icons/github.png" style="width: 25px;" id='github'/>
+                </div>
+            </div>
+        </div>
 
         <div class="upword-tabs">
             <div class="upword-tab">
-                Instructions
+                <div class="instructions">
+                    Instructions
+                </div>
                 <div class="upword-instructions-text">
                     1. Highlight a word by double clicking or dragging with the mouse <br/>
                     2. Right click the selection and look for "Look Upword" in the context menu <br/>

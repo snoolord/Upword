@@ -8,8 +8,33 @@ body {
   width: 400px;
   font-size: 14px;
   font-family: 'Catamaran', sans-serif;
+  text-align: left;
+}
+.upword-logo {
+    height: 80%
+}
+#winston-zhao {
+    text-decoration: underline;
+    font-size: 12px
+}
+#winston-zhao:hover {
+    cursor: pointer;
+}
+
+#linked-in:hover {
+    cursor: pointer;
+}
+#github:hover {
+    cursor: pointer;
+}
+.instructions {
+    font-size: 20px;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
 }
 html {
-
     box-shadow: 2px 5px 5px 2px rgba(100,100,100,.2);
 }
