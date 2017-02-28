@@ -3,9 +3,13 @@
 }
 
 body {
-    background: cornsilk;
+  background: cornsilk;
   text-align: center;
   width: 400px;
   font-size: 14px;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Catamaran', sans-serif;
+}
+html {
+
+    box-shadow: 2px 5px 5px 2px rgba(100,100,100,.2);
 }
