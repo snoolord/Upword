@@ -18,4 +18,5 @@ export const positionDropdown = (dropdown, selectionCoordinates) => {
     } else {
         dropdown.style.left = selectionCoordinates.left + 'px'
     }
+    dropdown.style.width = dropdown.offsetWidth + "px"
 }
