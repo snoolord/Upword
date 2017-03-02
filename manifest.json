@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Upword",
   "description": "Increase your vocabulary with this simple extension",
-  "version": "0.0.1.0",
+  "version": "0.1.0.0",
   "background": {
     "scripts": ["./event/event.js"]
   },
