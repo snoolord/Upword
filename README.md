@@ -3,7 +3,7 @@
 <img src="docs/upword-logo.png" style="width:200px">
 
 Upword is a Chrome Extension that allows users to quickly replace words with their synonyms in gmail. Upword can also be configured using a hotkey (in development).
-
+ 
 + [Check out the Upword Site](https://winstonjz.github.io/upword-site/)
 + [Download in the Chrome Extension Store](https://chrome.google.com/webstore/detail/upword/caccnpmojcgaglgnmbchfodecmfkcjkl?authuser=3)
 
