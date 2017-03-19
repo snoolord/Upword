@@ -67,3 +67,32 @@ function getSelectedWord() {
     throw 'Please select some text.';
   }
 }
+
+
+function insertText(newText) {
+  var newWordLength = newText.length;
+  var selection = DocumentApp.getActiveDocument().getSelection();
+  if (selection) {
+    var elements = selection.getSelectedElements();
+    if (elements.length == 1 &&
+        elements[0].getElement().getType() ==
+        DocumentApp.ElementType.INLINE_IMAGE) {
+      throw "Can't insert text into an image.";
+    }
+    var rangebuilder = DocumentApp.getActiveDocument().newRange();
+    for (var i = 0; i < elements.length; i++) {
+      if (elements[i].isPartial()) {
+        var element = elements[i].getElement().asText();
+        var startIndex = elements[i].getStartOffset();
+        var endIndex = elements[i].getEndOffsetInclusive();
+
+        var remainingText = element.getText().substring(endIndex + 1);
+        element.deleteText(startIndex, endIndex);
+        element.insertText(startIndex, newText);
+        var endNewIndex = startIndex + newWordLength - 1;
+        rangebuilder.addElement(element, startIndex, endNewIndex)
+      }
+    }
+    DocumentApp.getActiveDocument().setSelection(rangebuilder.build());
+  }
+}

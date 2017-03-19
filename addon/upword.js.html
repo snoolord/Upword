@@ -1,5 +1,187 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
+const generateGetWordButton = () => {
+  let upwordAnchor = document.getElementById('upword-anchor')
+  let upwordButton = document.createElement('paper-button')
+  upwordButton.setAttribute('class', 'upword-button')
+  upwordButton.innerHTML = 'Look UpWord'
+  upwordButton.addEventListener('click', function (e) {
+    let dropdown = document.getElementsByClassName('upword-dropdown')[0]
+    if(dropdown !== undefined) {
+      dropdown.remove()
+    }
+    google.script.run.withSuccessHandler(function(word) {
+        getWord(word[0], populateTabs);
+    }).getSelectedWord();
+  })
+  upwordAnchor.appendChild(upwordButton)
+}
+
+const addEventListeners = (item, itemWord, word) => {
+  item.addEventListener('click', function (e) {
+    //check to see if first character of new word should be upcased
+    if(/[A-Z]/.test(word[0])){
+      itemWord = itemWord.charAt(0).toUpperCase() + itemWord.slice(1)
+    }
+    //remove dropdown
+    let dropdown = document.getElementsByClassName('upword-dropdown')[0]
+    document.getElementsByClassName('upword-dropdown')[0].remove()
+    //add word to document
+    google.script.run.insertText(itemWord);
+  })
+  item.addEventListener('mouseover', function () {
+  })
+
+  item.addEventListener('mouseout', function () {
+  })
+}
+
+const createSynonymsList = (synonyms, word) => {
+    let synonymsContainer = document.createElement('div')
+    synonymsContainer.setAttribute('class', 'synonyms-container')
+    for (let i = 0; i < synonyms.length; i++) {
+        let synonym = document.createElement('div')
+        synonym.setAttribute('class', 'synonym')
+        synonym.innerHTML = synonyms[i]
+        addEventListeners(synonym, synonyms[i], word)
+        synonymsContainer.appendChild(synonym)
+    }
+    return synonymsContainer
+}
+
+const createRelatedList = (relatedWords, word) => {
+    let relatedListContainer = document.createElement('div')
+    relatedListContainer.setAttribute('id', 'related')
+    for (let i = 0; i < relatedWords.length; i++) {
+        let wordA = document.createElement('div')
+        wordA.setAttribute('class', 'related-word-link')
+        // wordA.setAttribute('href', `http://www.dictionary.com/browse/${relatedWords[i]}?s=t`)
+        addEventListeners(wordA, relatedWords[i], word)
+        wordA.innerHTML = relatedWords[i]
+        relatedListContainer.appendChild(wordA)
+    }
+    return relatedListContainer
+}
+
+const populateTabs = function (wordInfo, word) {
+  let upwordDropdown = document.createElement('div')
+  upwordDropdown.setAttribute('class', 'upword-dropdown');
+  createDropdownTabsAndInfo(upwordDropdown, wordInfo, word);
+  return upwordDropdown;
+}
+
+const getSelection = () => {
+  google.script.run.withSuccessHandler(function(word) {
+      getWord(word[0], populateTabs);
+  }).getSelectedWord();
+}
+
+const createList = (partOfSpeech, definitions, word) => {
+    let partOfSpeechList = document.createElement('div');
+    partOfSpeechList.setAttribute('id', `${partOfSpeech}-list`);
+    partOfSpeechList.setAttribute('class', `part-of-speech-list`);
+    // partOfSpeechList.style.width = 100 + "px";
+    // partOfSpeechList.style.width = 25 + "px";
+    for (let i = 0; i < definitions.length; i++) {
+        let currDef = definitions[i];
+        let definitionLine = document.createElement('div');
+        definitionLine.setAttribute('class', 'definition-line');
+        definitionLine.innerHTML = i + 1 + '. ' + currDef.definition;
+        // definitionLine.addEventListener('mouseover', function () {
+        //     let activeList = document.getElementsByClassName('synonyms-container active')[0]
+        //     if (activeList) {
+        //         activeList.classList.remove('active')
+        //     }
+        //     this.childNodes[0].classList.add('active')
+        // })
+        let synonymsList = createSynonymsList(currDef.synonyms, word);
+        definitionLine.appendChild(synonymsList);
+        partOfSpeechList.appendChild(definitionLine);
+    }
+    return partOfSpeechList;
+}
 
 
+const createDropdownTabsAndInfo = (dropdownContainer, wordInfo, word) => {
+    let dropdownButtons = document.createElement('div')
+    dropdownButtons.setAttribute('class', 'pos-buttons')
+    let lists = []
+    let first = 0
+    if (wordInfo.related) {
+        let notFoundButton = createTabButton('Did you mean')
+        dropdownButtons.appendChild(notFoundButton)
+        let relatedList = createRelatedList(wordInfo.related, word)
+        dropdownContainer.appendChild(dropdownButtons)
+        dropdownContainer.appendChild(relatedList)
+    } else {
+        for (let partOfSpeech in wordInfo) {
+            if (partOfSpeech !== 'word' && partOfSpeech !== 'related') {
+                let partOfSpeechButton = createTabButton(partOfSpeech, partOfSpeech)
+                dropdownButtons.appendChild(partOfSpeechButton)
+                partOfSpeechButton.addEventListener('click', function () {
+                    let activeButton = document.getElementsByClassName('pos-button active')[0]
+                    let activeList = document.getElementsByClassName('part-of-speech-list active')[0]
+                    activeButton.classList.remove('active')
+                    activeList.classList.remove('active')
+                    document.getElementById(`${partOfSpeech}-list`).classList.add('active')
+                    this.classList.add('active')
+                })
+                let list = createList(partOfSpeech, wordInfo[partOfSpeech], word)
+                if (first === 0) {
+                    partOfSpeechButton.classList.add('active')
+                    list.classList.add('active')
+                    first++
+                }
+                lists.push(list)
+            }
+        }
+        dropdownContainer.appendChild(dropdownButtons)
+        lists.forEach(list => {
+            dropdownContainer.appendChild(list)
+        })
+    }
+}
+
+var createTabButton = (innerText, partOfSpeech) => {
+    if (!partOfSpeech) partOfSpeech = 'related'
+    let partOfSpeechButton = document.createElement('div')
+    let posButtonText = document.createElement('div')
+    partOfSpeechButton.appendChild(posButtonText)
+    posButtonText.setAttribute('class', 'pos-button-text')
+    posButtonText.innerHTML = innerText
+        if (partOfSpeech === 'related') {
+            let relatedWordHover = document.createElement('div')
+            relatedWordHover.setAttribute('id', 'related-word')
+            partOfSpeechButton.appendChild(relatedWordHover)
+        }
+        partOfSpeechButton.setAttribute('id', `${partOfSpeech}-button`)
+        partOfSpeechButton.setAttribute('class', 'pos-button')
+    return partOfSpeechButton
+}
+
+const getWord = function (word, callback) {
+  let txt = word
+  let  = /[A-Z]/.test(word[0]);
+  let url = 'https://upword-server.herokuapp.com/word/'
+  let that = this
+  axios.get(url + txt, {
+    validateStatus: function (status) {
+      return status >= 200 && status < 300
+    }
+  }).then(function (response) {
+    let upwordAnchor = document.getElementById('upword-anchor')
+    let populateTabs = callback.call(that, response.data, word)
+    upwordAnchor.appendChild(populateTabs)
+  }).catch(function () {
+      axios.post(url, {
+          word: txt
+      }).then(function (response) {
+          let upwordAnchor = document.getElementById('upword-anchor')
+          let populateTabs = callback.call(that, response.data, word)
+          upwordAnchor.appendChild(populateTabs)
+      })
+  })
+}
+
+generateGetWordButton()
 </script>
