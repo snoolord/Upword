@@ -11,7 +11,7 @@ function onInstall(e) {
 function showSidebar() {
   var ui = HtmlService.createTemplateFromFile('upword').evaluate()
       .setSandboxMode(HtmlService.SandboxMode.IFRAME)
-      .setTitle('Upword');
+      .setTitle('UPWORD');
   DocumentApp.getUi().showSidebar(ui);
 }
 
